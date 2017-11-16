@@ -80,20 +80,6 @@ public class SortedArrayList<E> implements SortedList {
 	}
 
 	/**
-     * Returns true if this list contains the specified element. More formally,
-     * returns true if and only if this list contains at least one element a such
-     * that (o==null ? a==null : o.equals(a)).
-     *
-     * @param e element whose presence in this list is to be tested
-     * @return true if this list contains the specified element
-     */
-	@Override
-	public boolean contains(Comparable e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/**
      * Adds the specified element to list in sorted order
      *
      * Lists that support this operation may place limitations on what elements may
@@ -145,33 +131,16 @@ public class SortedArrayList<E> implements SortedList {
 	}
 
 	/**
-     * Returns the element at the specified position in this list.
-     *
-     * @param index index of the element to return
-     * @return the element at the specified position in this list
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 ||
-     *             index >= size())
-     */
-	@Override
-	public Comparable get(int index) {
-		if (index < 0 || index >= this.size()) {
-			throw new IndexOutOfBoundsException("Index is outside the accepatble range");
-		} else {
-			return list[index];
-		}
-	}
-
-	/**
-     * Removes the element at the specified position in this list (optional
-     * operation). Shifts any subsequent elements to the left (subtracts one from
-     * their indices). Returns the element that was removed from the list.
-     * This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
-     *
-     * @param index the index of the element to be removed
-     * @return the element previously at the specified position
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 ||
-     *             index >= size())
-     */
+	 * Removes the element at the specified position in this list (optional
+	 * operation). Shifts any subsequent elements to the left (subtracts one from
+	 * their indices). Returns the element that was removed from the list.
+	 * This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
+	 *
+	 * @param index the index of the element to be removed
+	 * @return the element previously at the specified position
+	 * @throws IndexOutOfBoundsException if the index is out of range (index < 0 ||
+	 *             index >= size())
+	 */
 	@Override
 	public Comparable remove(int index) {
 		if (index < 0 || index >= this.size()) {
@@ -191,6 +160,36 @@ public class SortedArrayList<E> implements SortedList {
 	}
 
 	/**
+     * Returns the element at the specified position in this list.
+     *
+     * @param index index of the element to return
+     * @return the element at the specified position in this list
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 ||
+     *             index >= size())
+     */
+	@Override
+	public Comparable get(int index) {
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException("Index is outside the accepatble range");
+		} else {
+			return list[index];
+		}
+	}
+
+	/**
+	 * Returns true if this list contains the specified element. More formally,
+	 * returns true if and only if this list contains at least one element a such
+	 * that (o==null ? a==null : o.equals(a)).
+	 *
+	 * @param e element whose presence in this list is to be tested
+	 * @return true if this list contains the specified element
+	 */
+	@Override
+	public boolean contains(Comparable e) {
+		return (binarySearch(list, e) != -1);
+	}
+
+	/**
      * Returns the index of the first occurrence of the specified element in this
      * list, or -1 if this list does not contain the element. More formally, returns
      * the lowest index i such that (o==null ? get(i)==null : o.equals(get(i))), or
@@ -202,8 +201,31 @@ public class SortedArrayList<E> implements SortedList {
      */
 	@Override
 	public int indexOf(Comparable e) {
-		// TODO Auto-generated method stub
-		return 0;
+		return binarySearch(list, e);
+	}
+	
+	/**
+	 * 
+	 * Precondition: the elements in the list must be in sorted order
+	 * Code taken from https://pages.github.ncsu.edu/engr-csc216-staff/CSC216-SE-Materials/lectures/Heckman/slides/25_Searching.pdf
+	 * @return
+	 */
+	private int binarySearch(Comparable[] arr, Comparable e) {
+		int min = 0;
+		int max = arr.length - 1;
+		
+		while (min <= max) {
+			int mid = (min + max)/2;
+			//If the currently indexed element in the list is lexicographically greater than the target
+			if (arr[mid].compareTo(e) < 0) {
+				min = mid + 1;
+			} else if (arr[mid].compareTo(e) > 0) {
+				max = mid - 1;
+			} else {
+				return mid;
+			}
+		}
+		return -1;
 	}
 
 }
