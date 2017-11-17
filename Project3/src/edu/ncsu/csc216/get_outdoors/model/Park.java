@@ -53,19 +53,36 @@ public class Park extends Observable {
 	 *                                  null, empty, or contain whitespace.
 	 */
 	public Park(String parkID, String name, String description, double snowChange) {
-		if (parkID == null || parkID.matches("(\\s)*")) {
+		if (parkID == null) {
 			throw new IllegalArgumentException("Park ID cannot be null, empty, or contain whitespace.");
+		} else {
+			parkID = parkID.trim();
+			if (parkID.equals("")) {
+				throw new IllegalArgumentException("Park ID cannot be null, empty, or contain whitespace.");
+			} else {
+				this.parkID = parkID;
+			}
 		}
-		if (name == null || description.matches("(\\s)*")) {
-			throw new IllegalArgumentException("Park name cannot be null, empty, or contain whitespace.");
+		if (name == null) {
+			throw new IllegalArgumentException("Park ID cannot be null, empty, or contain whitespace.");
+		} else {
+			name = name.trim();
+			if (name.equals("")) {
+				throw new IllegalArgumentException("Park ID cannot be null, empty, or contain whitespace.");
+			} else {
+				this.name = name;
+			}
 		}
-		if (description == null || description.matches("(\\s)*")) {
-			throw new IllegalArgumentException("Park description cannot be null, empty, or contain whitespace.");
+		if (description == null) {
+			throw new IllegalArgumentException("Park ID cannot be null, empty, or contain whitespace.");
+		} else {
+			description = description.trim();
+			if (description.equals("")) {
+				throw new IllegalArgumentException("Park ID cannot be null, empty, or contain whitespace.");
+			} else {
+				this.description = description;
+			}
 		}
-		
-		this.parkID = parkID.trim();
-		this.name = name.trim();
-		this.description = description.trim();
 
 		// The Observers are notified within setSnowChange().
 		setSnowChange(snowChange);
