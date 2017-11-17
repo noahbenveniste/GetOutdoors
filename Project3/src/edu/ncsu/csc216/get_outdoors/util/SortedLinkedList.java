@@ -11,11 +11,12 @@ package edu.ncsu.csc216.get_outdoors.util;
  */
 public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> {
 
-	/** A dummy node at the front of the linked list. */
+	/** A dummy node representing the front of the linked list. */
 	private Node head;
 
 	/**
-	 * Constructs a new SortedLinkedList.
+	 * Constructs a new SortedLinkedList, with a dummy node, "head" as the first Node.
+	 * Using a dummy node simplifies some of the implementation in other methods.
 	 */
 	public SortedLinkedList() {
 		head = new Node(null, null);
@@ -50,6 +51,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 *   
 	 * @param element the element to check the list for.
 	 * @return true if the list contains the element; false otherwise.
+	 * @throws NullPointerException if the parameter is null.
 	 */
 	@Override
 	public boolean contains(E element) {
@@ -69,7 +71,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 * Duplicates are not allowed to be added to the list, as determined by contains().
 	 *   
 	 * @param element the element to add.
-	 * @return true if the element was added to the list; false otherwise.
+	 * @return returns true if the element was added to the list.
 	 * @throws NullPointerException if the parameter is null.
 	 * @throws IllegalArgumentException if the passed element is a duplicate.
 	 */
@@ -136,11 +138,17 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 
 	/**
 	 * Returns whether this SortedLinkedList is equal to the parameter.
+	 * This is considered true the lists are of equal length, both of type
+	 *   SortedLinkedList, with identical elements in the same order.
 	 * 
 	 * @returns true if the parameter equals this object; false otherwise.
+	 * @param other the Object to compare to this instance.
 	 */
 	@Override
 	public boolean equals(Object other) {
+		if (other == null) {
+			return false;
+		}
 		if (!(other instanceof SortedLinkedList)) {
 			return false;
 		}
@@ -268,7 +276,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		 *   size() would return 0.
 		 *   
 		 * @param index the index in the list of the this Node.
-		 * @return size of the list.
+		 * @return returns the size of the list.
 		 */
 		public int size(int index) {
 			// The element at the zeroth index is the "head" nodex. 
@@ -283,7 +291,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		 * Returns whether this Node or any of its successors contain the passed element.
 		 * 
 		 * @param the element to check for.
-		 * @return true if this Node or any successors contain the element; false otherwise.
+		 * @return returns true if this Node or any successors contain the element; false otherwise.
 		 */
 		public boolean contains(E element) {
 			// Case at the end of the list, of any size.
