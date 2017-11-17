@@ -43,7 +43,34 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 */
 	public Trail(String id, String name, SortedArrayList<Activity> activities, boolean closedForMaintenance, double snow, double distance, Difficulty d) {
 		constructed = false;
-		
+		if (id == null) {
+			throw new IllegalArgumentException("Trail ID cannot be null");
+		} else {
+			id = id.trim();
+			if (id.equals("")) {
+				throw new IllegalArgumentException("Trail ID is either empty or all whitespace");
+			} else {
+				this.trailID = id;
+			}
+		}
+		if (name == null) {
+			throw new IllegalArgumentException("Trail name cannot be null");
+		} else {
+			name = name.trim();
+			if (name.equals("")) {
+				throw new IllegalArgumentException("Trail name is either empty or all whitespace");
+			} else {
+				this.trailName = name;
+			}
+		}
+		setActivities(activities);
+		setTrailMaintenance(closedForMaintenance);
+		setSnow(snow);
+		if (d == null) {
+			throw new IllegalArgumentException("Difficulty cannot be null");
+		} else {
+			this.difficulty = d;
+		}
 		constructed = true;
 		setChanged(); //Marks the Observable as changed
 		notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
@@ -54,6 +81,7 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 * 
 	 * 
 	 * @param activities
+	 * @throws
 	 */
 	public void setActivities(SortedArrayList<Activity> activities) {
 		if (activities == null) {
@@ -83,10 +111,20 @@ public class Trail extends Observable implements Comparable<Trail> {
 	
 	/**
 	 * 
+	 * 
 	 * @param snow
 	 */
 	public void setSnow(double snow) {
-		
+		if (snow < 0) {
+			this.snow = 0;
+		} else {
+			this.snow = snow;
+		}
+		if (constructed) {
+			setChanged(); //Marks the Observable as changed
+			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
+			// The current instance is passed in except in specific instance listed in the detailed method descriptions, below.
+		}
 	}
 	
 	/**
@@ -95,7 +133,20 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 * @return
 	 */
 	public double addSnow(double snow) {
-		return 0.0;
+		double sum = this.snow + snow;
+		//If the added snowfall would result in a negative sum i.e. snow loss is greater
+		//than the current amount of snow, set the snow amount to zero
+		if (sum < 0) {
+			sum = 0;
+		}
+		this.snow = sum;
+		if (constructed) {
+			setChanged(); //Marks the Observable as changed
+			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
+			// The current instance is passed in except in specific instance listed in the detailed method descriptions, below.
+		}
+		//Return the updated snow amount
+		return this.snow;
 	}
 	
 	/**
@@ -103,7 +154,16 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 * @param distance
 	 */
 	public void setDistance(double distance) {
-		
+		if (distance < 0) {
+			throw new IllegalArgumentException("Trail distance cannot be negative");
+		} else {
+			this.distance = distance;
+		}
+		if (constructed) {
+			setChanged(); //Marks the Observable as changed
+			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
+			// The current instance is passed in except in specific instance listed in the detailed method descriptions, below.
+		}
 	}
 	
 	/**
@@ -168,29 +228,42 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 * @return
 	 */
 	public boolean trailOpen(Activity a) {
-		return false;
+		if (closedForMaintenance) {
+			return false;
+		} else {
+			int snowBoundary = a.getSnowBoundary();
+			if (a.snowNeeded()) {
+				return (snowBoundary >= this.getSnow());
+			} else {
+				return (snowBoundary <= this.getSnow());
+			}
+		}
 	}
 
 	/**
+	 * Checks if a specified activity is on the list of allowable activities.
 	 * 
 	 * @param a
 	 * @return
 	 */
 	public boolean allow(Activity a) {
-		return false;
+		return activities.contains(a);
 	}
 
 	/**
+	 * 
 	 * 
 	 * @param t
 	 * @return
 	 */
 	public int compareTo(Trail t) {
-		return 0;
+		return this.getTrailName().compareTo(t.getTrailName());
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * 
+	 * 
+	 * @return
 	 */
 	@Override
 	public int hashCode() {
@@ -210,54 +283,38 @@ public class Trail extends Observable implements Comparable<Trail> {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * 
+	 * 
+	 * @param obj
+	 * @return
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Trail other = (Trail) obj;
-		if (activities == null) {
-			if (other.activities != null)
+		if (obj instanceof Trail) {
+			Trail t = (Trail) obj;
+			if (this.trailName.equals(t.getTrailName())) {
+				return true;
+			} else {
 				return false;
-		} else if (!activities.equals(other.activities))
+			}
+		} else {
 			return false;
-		if (closedForMaintenance != other.closedForMaintenance)
-			return false;
-		if (constructed != other.constructed)
-			return false;
-		if (difficulty != other.difficulty)
-			return false;
-		if (Double.doubleToLongBits(distance) != Double.doubleToLongBits(other.distance))
-			return false;
-		if (Double.doubleToLongBits(snow) != Double.doubleToLongBits(other.snow))
-			return false;
-		if (trailID == null) {
-			if (other.trailID != null)
-				return false;
-		} else if (!trailID.equals(other.trailID))
-			return false;
-		if (trailName == null) {
-			if (other.trailName != null)
-				return false;
-		} else if (!trailName.equals(other.trailName))
-			return false;
-		return true;
+		}
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * 
+	 * 
+	 * @return
 	 */
 	@Override
 	public String toString() {
-		return "Trail [trailID=" + trailID + ", trailName=" + trailName + ", closedForMaintenance="
-				+ closedForMaintenance + ", snow=" + snow + ", distance=" + distance + ", activities=" + activities
-				+ ", difficulty=" + difficulty + ", constructed=" + constructed + "]";
+		String a = activities.get(0).toString();
+		for (int i = 1; i < activities.size(); i++) {
+			a += "\t" + activities.get(i).toString();
+		}
+		return "" + getTrailName() + "\t" + closedForMaintenance() + "\t" + getSnow() + "\t" + getDistance() + "\t" + getDifficulty().toString() + a;
 	}
 
 }
