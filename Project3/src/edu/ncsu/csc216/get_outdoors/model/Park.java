@@ -25,8 +25,9 @@ public class Park extends Observable {
 	
 	/**
 	 * Constructs a Park with the passed id, name, and description. The parameters 
-	 *   must not be null, empty, or contain whitespace. Construction is 
+	 *   must not be null, empty, or contain only whitespace. Construction is 
 	 *   delegated to the Park(String,String,String,double) constructor.
+	 *   Any leading or trailing whitespace is trimmed from valid Strings.
 	 * Observers are notified of the change at the end of construction.
 	 * 
 	 * @param parkID the park's ID. 
@@ -41,6 +42,7 @@ public class Park extends Observable {
 	 * Constructs a Park with the passed id, name, description, and snowfall delta. 
 	 *   The parameters must not be null, empty, or contain whitespace. Construction 
 	 *   is delegated to the Park(String,String,String,double) constructor.
+	 *   Any leading or trailing whitespace is trimmed from valid Strings.
 	 * Observers of Park are notified at the end of construction.
 	 * 
 	 * @param parkID the park's ID. 
@@ -61,9 +63,9 @@ public class Park extends Observable {
 			throw new IllegalArgumentException("Park description cannot be null, empty, or contain whitespace.");
 		}
 		
-		this.parkID = parkID;
-		this.name = name;
-		this.description = description;
+		this.parkID = parkID.trim();
+		this.name = name.trim();
+		this.description = description.trim();
 
 		// The Observers are notified within setSnowChange().
 		setSnowChange(snowChange);
