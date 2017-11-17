@@ -34,7 +34,7 @@ public class Park extends Observable {
 	 * @param description a brief description of the park.
 	 */
 	public Park(String parkID, String name, String description) {
-		
+		this(parkID, name, description, 0);
 	}
 
 	/**
