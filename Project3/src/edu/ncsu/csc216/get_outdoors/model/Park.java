@@ -122,7 +122,7 @@ public class Park extends Observable implements Comparable<Park> {
 	 * 
 	 * @return the most recent change in snow depth, in inches.
 	 */
-	public double getSnowChanged() {
+	public double getSnowChange() {
 		return snowChange;
 	}
 	

@@ -136,13 +136,13 @@ public class ParkTest {
 		assertEquals(VALID_ID, p.getParkID());
 		assertEquals(VALID_NAME, p.getName());
 		assertEquals(VALID_DESC, p.getDescription());
-		assertTrue(DEFAULT_SNOWFALL == p.getSnowChanged());
+		assertTrue(DEFAULT_SNOWFALL == p.getSnowChange());
 		p = null;
 		p = new Park(VALID_ID_WHITESPACE, VALID_NAME_WHITESPACE, VALID_DESC_WHITESPACE);
 		assertEquals(VALID_ID, p.getParkID());
 		assertEquals(VALID_NAME, p.getName());
 		assertEquals(VALID_DESC, p.getDescription());
-		assertTrue(DEFAULT_SNOWFALL == p.getSnowChanged());
+		assertTrue(DEFAULT_SNOWFALL == p.getSnowChange());
 	}
 	
 	/**
@@ -155,7 +155,7 @@ public class ParkTest {
 		assertEquals(VALID_ID, p.getParkID());
 		assertEquals(VALID_NAME, p.getName());
 		assertEquals(VALID_DESC, p.getDescription());
-		assertTrue(VALID_SNOWFALL == p.getSnowChanged());
+		assertTrue(VALID_SNOWFALL == p.getSnowChange());
 	}
 	
 	/**
@@ -164,13 +164,13 @@ public class ParkTest {
 	@Test
 	public void testSetSnowChange() {
 		p = new Park(VALID_ID, VALID_NAME, VALID_DESC);
-		assertTrue(DEFAULT_SNOWFALL == p.getSnowChanged());
+		assertTrue(DEFAULT_SNOWFALL == p.getSnowChange());
 		p.setSnowChange(-5.3);
-		assertTrue(-5.3 == p.getSnowChanged());
+		assertTrue(-5.3 == p.getSnowChange());
 		p.setSnowChange(5.3);
-		assertTrue(5.3 == p.getSnowChanged());
+		assertTrue(5.3 == p.getSnowChange());
 		p.setSnowChange(0);
-		assertTrue(0 == p.getSnowChanged());
+		assertTrue(0 == p.getSnowChange());
 	}
 
 	/**
