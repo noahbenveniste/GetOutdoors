@@ -18,6 +18,5 @@ public enum Difficulty {
 	/** */
 	VERY_DIFFICULT,
 	/** */
-	EXTREME
-	
+	EXTREME;
 }
