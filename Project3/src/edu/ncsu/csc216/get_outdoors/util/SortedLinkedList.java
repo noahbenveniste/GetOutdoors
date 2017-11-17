@@ -10,6 +10,7 @@ package edu.ncsu.csc216.get_outdoors.util;
  * @param <E> the element type to be stored in the list.
  */
 public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> {
+
 	/** A dummy node at the front of the linked list. */
 	private Node head;
 
