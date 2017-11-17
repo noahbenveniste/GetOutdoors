@@ -6,14 +6,14 @@ package edu.ncsu.csc216.get_outdoors.util;
  * 
  * @param <E>
  */
-public class SortedArrayList<E> implements SortedList {
+public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 
 	/** */
 	private static final int RESIZE = 10;
 	/** */
 	private static final int DEFAULT_CAPACITY = 10;
 	/** */
-	private Comparable[] list;
+	private E[] list;
 	/** */
 	private int size;
 	/** */
@@ -33,7 +33,7 @@ public class SortedArrayList<E> implements SortedList {
 	 */
 	@SuppressWarnings("unchecked")
 	public SortedArrayList(int capacity) {
-		Object[] o = new Object[capacity];
+		Comparable<E>[] o = new Comparable[capacity];
 		this.size = 0;
 		this.list = (E[]) o;
 		this.capacity = list.length;
@@ -48,7 +48,7 @@ public class SortedArrayList<E> implements SortedList {
 		// Update capacity
 		this.capacity += RESIZE;
 		// Create a new object array with the new, larger capacity
-		Object[] o = new Object[this.capacity];
+		Comparable<E>[] o = new Comparable[this.capacity];
 		// Cast to generic type
 		E[] temp = (E[]) o;
 		// Assign the elements from the old array to the same index in the new array
@@ -93,23 +93,35 @@ public class SortedArrayList<E> implements SortedList {
      * @return true (as specified by {@link Collection#add})
      */
 	@Override
-	public boolean add(Comparable e) {
+	public boolean add(E e) {
+		//Check for null input
 		if (e == null) {
 			throw new NullPointerException("Cannot add null elements");
 		}
+		
+		//Check for repeat elements
 		for (int i = 0; i < this.size(); i++) {
 			if (this.list[i].equals(e)) {
 				throw new IllegalArgumentException("Cannot add repeat elements");
 			}
 		}
+		
+		//Check if the list has reached capacity
 		if (this.size() == this.capacity) { // Grow the array if list is full
 			this.resize();
 		}
-		//Case where the element is appended to the end of the list i.e. the element being 
-		//added is lexicographically less than the last element in the list
-		if (list[this.size - 1].compareTo(e) < 0) {
-			
+		
+		//Adding to an empty list
+		if (size == 0) {
+			list[size] = e;
+			size++;
+			return true;
+		} else if (list[this.size - 1].compareTo(e) < 0) { //Case where the element is appended to the end of the list i.e. the element being 
+			list[size] = e; 							   //added is lexicographically less than the last element in the list
+			size++; 
+			return true;
 		}
+		
 		//Find the index where the element needs to go
 		int index = 0;
 		for (int i = 0; i < this.size; i++) {
@@ -120,6 +132,7 @@ public class SortedArrayList<E> implements SortedList {
 				break;
 			}
 		}
+		
 		//Right shift the array to insert the element at the necessary index
 		for (int i = this.size; i > index; i--) {
 			list[i] = list[i - 1];
@@ -128,6 +141,7 @@ public class SortedArrayList<E> implements SortedList {
 		list[index] = e;
 		// Increment the size of the ArrayList
 		this.size++;
+		return true;
 	}
 
 	/**
@@ -142,7 +156,7 @@ public class SortedArrayList<E> implements SortedList {
 	 *             index >= size())
 	 */
 	@Override
-	public Comparable remove(int index) {
+	public E remove(int index) {
 		if (index < 0 || index >= this.size()) {
 			throw new IndexOutOfBoundsException("Index is outside the accepatble range");
 		}
@@ -168,7 +182,7 @@ public class SortedArrayList<E> implements SortedList {
      *             index >= size())
      */
 	@Override
-	public Comparable get(int index) {
+	public E get(int index) {
 		if (index < 0 || index >= this.size()) {
 			throw new IndexOutOfBoundsException("Index is outside the accepatble range");
 		} else {
@@ -185,8 +199,8 @@ public class SortedArrayList<E> implements SortedList {
 	 * @return true if this list contains the specified element
 	 */
 	@Override
-	public boolean contains(Comparable e) {
-		return (binarySearch(list, e) != -1);
+	public boolean contains(E e) {
+		return (binarySearch(e) != -1);
 	}
 
 	/**
@@ -200,8 +214,8 @@ public class SortedArrayList<E> implements SortedList {
      *         list, or -1 if this list does not contain the element
      */
 	@Override
-	public int indexOf(Comparable e) {
-		return binarySearch(list, e);
+	public int indexOf(E e) {
+		return binarySearch(e);
 	}
 	
 	/**
@@ -210,22 +224,43 @@ public class SortedArrayList<E> implements SortedList {
 	 * Code taken from https://pages.github.ncsu.edu/engr-csc216-staff/CSC216-SE-Materials/lectures/Heckman/slides/25_Searching.pdf
 	 * @return
 	 */
-	private int binarySearch(Comparable[] arr, Comparable e) {
+	private int binarySearch(E e) {
+		if (e == null) {
+			throw new NullPointerException("List cannot have null elements");
+		} else if (size == 0) {
+			return -1;
+		}
+		
 		int min = 0;
-		int max = arr.length - 1;
+		int max = size - 1;
 		
 		while (min <= max) {
 			int mid = (min + max)/2;
 			//If the currently indexed element in the list is lexicographically greater than the target
-			if (arr[mid].compareTo(e) < 0) {
+			if (get(mid).compareTo(e) < 0) {
 				min = mid + 1;
-			} else if (arr[mid].compareTo(e) > 0) {
+			} else if (get(mid).compareTo(e) > 0) {
 				max = mid - 1;
 			} else {
 				return mid;
 			}
 		}
 		return -1;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		//Fencepost
+		String out = "[" + get(0).toString();
+		//Concatenate the string
+		for (int i = 1; i < size; i++) {
+			out += ", " + get(i);
+		}
+		out += "]";
+		return out;
 	}
 
 }
