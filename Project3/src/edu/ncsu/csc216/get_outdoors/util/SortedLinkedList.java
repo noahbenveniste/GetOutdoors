@@ -54,6 +54,9 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	@Override
 	public boolean contains(E element) {
 		// Empty list is guaranteed to not contain the element.
+		if (element == null) {
+			throw new NullPointerException("List cannot have null elements");
+		}
 		if (size() == 0) {
 			return false;
 		}
@@ -118,12 +121,65 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 * Returns the specified element's index in the list, if it exists. If it
 	 *   it doesn't exist in the list, "-1" is returned.
 	 * 
-	 * @param the element to for.
+	 * @param element the element to search for.
 	 * @return the element's index in the list.
 	 */
 	@Override
-	public int indexOf(E e) {
-		return head.indexOf(e, 0);
+	public int indexOf(E element) {
+		if (!(contains(element))) {
+			return -1;
+		}
+		return head.indexOf(element, 0);
+	}
+
+	// TODO - Implement hashCode() method once the implementation details are determined.
+
+	/**
+	 * Returns whether this SortedLinkedList is equal to the parameter.
+	 * 
+	 * @returns true if the parameter equals this object; false otherwise.
+	 */
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof SortedLinkedList)) {
+			return false;
+		}
+
+		@SuppressWarnings("unchecked")
+		SortedLinkedList<E> otherList = (SortedLinkedList<E>) other;
+		if (otherList.size() != size()) {
+			return false;
+		}
+		
+		for (int i = 0; i < size(); i++) {
+			if (!(otherList.get(i).equals(get(i)))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Returns a String representation of the list formatted as.
+	 * "[<E1.toString(), <E2.toString()>, ... , <EN.toString()>]"
+	 * 
+	 * For example, a list with elements "apple", "banana", and "carrot" 
+	 *   would return a String formatted as:
+	 * "[apple, banana, carrot]"
+	 * 
+	 * @return String 
+	 */
+	public String toString() {
+		String returnString = "[";
+		for (int i = 0; i < size() - 1; i++) {
+			returnString += get(i).toString() + ", ";
+		}
+
+		if (size() > 0) {
+			returnString += get(size() - 1).toString();
+		} 
+		returnString += "]";
+		return returnString;
 	}
 	
 	/**
@@ -170,11 +226,22 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 			}
 		}
 
-		public int indexOf(E e, int index) {
-			if (next.data.equals(e)) {
+		/**
+		 * If this Node's next element is the one being searched for, the index
+		 *   of this Node is returned. Note that the index of the zeroth element,
+		 *   the dummy node "head", in the linked list, is actually one. Otherwise,
+		 *   the method calls itself for the next node in the list, passing an 
+		 *   incremented index value.
+		 *   
+		 * @param element the element to search for.
+		 * @param index the index of this Node in the linked list.
+		 * @return returns the index of the element being searched for.
+		 */
+		public int indexOf(E element, int index) {
+			if (next.data.equals(element)) {
 				return index;
 			} else {
-				return next.indexOf(e, index + 1);
+				return next.indexOf(element, index + 1);
 			}
 		}
 
@@ -187,7 +254,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		 * @return returns true if the element was added to the list.
 		 */
 		public boolean add(E element) {
-			if (next == null || next.data.compareTo(element) < 0) {
+			if (next == null || element.compareTo(next.data) < 0) {
 				next = new Node(element, next);
 				return true;
 			} else {
@@ -208,7 +275,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 			if (next == null) {
 				return index;
 			} else {
-				return next.size(index++);
+				return next.size(index + 1);
 			}
 		}
 		
