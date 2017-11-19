@@ -41,8 +41,12 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 * @param distance
 	 * @param d
 	 */
-	public Trail(String id, String name, SortedArrayList<Activity> activities, boolean closedForMaintenance, double snow, double distance, Difficulty d) {
+	public Trail(String id, String name, SortedArrayList<Activity> activities, boolean closedForMaintenance, 
+			     double snow, double distance, Difficulty diff) 
+	{
 		constructed = false;
+
+		// Checking "id" param and setting Trail ID if valid.
 		if (id == null) {
 			throw new IllegalArgumentException("Trail ID cannot be null");
 		} else {
@@ -53,6 +57,8 @@ public class Trail extends Observable implements Comparable<Trail> {
 				this.trailID = id;
 			}
 		}
+
+		// Checking "name" param and setting Trail ID if valid.
 		if (name == null) {
 			throw new IllegalArgumentException("Trail name cannot be null");
 		} else {
@@ -63,15 +69,18 @@ public class Trail extends Observable implements Comparable<Trail> {
 				this.trailName = name;
 			}
 		}
+
 		setActivities(activities);
 		setTrailMaintenance(closedForMaintenance);
 		setSnow(snow);
 		setDistance(distance);
-		if (d == null) {
+
+		if (diff == null) {
 			throw new IllegalArgumentException("Difficulty cannot be null");
 		} else {
-			this.difficulty = d;
+			this.difficulty = diff;
 		}
+
 		constructed = true;
 		setChanged(); //Marks the Observable as changed
 		notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
@@ -234,9 +243,9 @@ public class Trail extends Observable implements Comparable<Trail> {
 		} else {
 			int snowBoundary = a.getSnowBoundary();
 			if (a.snowNeeded()) {
-				return (snowBoundary >= this.getSnow());
-			} else {
 				return (snowBoundary <= this.getSnow());
+			} else {
+				return (snowBoundary >= this.getSnow());
 			}
 		}
 	}
@@ -311,11 +320,12 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 */
 	@Override
 	public String toString() {
-		String a = activities.get(0).toString();
+		String activitiesString = activities.get(0).toString();
 		for (int i = 1; i < activities.size(); i++) {
-			a += "\t" + activities.get(i).toString();
+			activitiesString += "\t" + activities.get(i).toString();
 		}
-		return "" + getTrailName() + "\t" + closedForMaintenance() + "\t" + getSnow() + "\t" + getDistance() + "\t" + getDifficulty().toString() + a;
+		return getTrailName() + "\t" + closedForMaintenance() + "\t" + getSnow() + "\t" + 
+		       getDistance() + "\t" + getDifficulty().toString() + "\t" + activitiesString;
 	}
 
 }
