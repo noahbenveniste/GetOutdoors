@@ -335,16 +335,18 @@ public class TrailList extends Observable implements Observer, Tabular {
 
 		// Populating 2D array with Trail info.
 		Object[][] trailListArray = new Object[openCount][7];
+		int index = 0;
 		for (int i = 0; i < trails.size(); i++) {
 			Trail current = trails.get(i);
 			if (!current.closedForMaintenance()) {
-				trailListArray[i][0] = current.getTrailID();
-				trailListArray[i][1] = current.getTrailName();
-				trailListArray[i][2] = current.closedForMaintenance();
-				trailListArray[i][3] = current.getSnow();
-				trailListArray[i][4] = current.getDistance();
-				trailListArray[i][5] = current.getDifficulty();
-				trailListArray[i][6] = current.getActivities();
+				trailListArray[index][0] = current.getTrailID();
+				trailListArray[index][1] = current.getTrailName();
+				trailListArray[index][2] = current.closedForMaintenance();
+				trailListArray[index][3] = current.getSnow();
+				trailListArray[index][4] = current.getDistance();
+				trailListArray[index][5] = current.getDifficulty();
+				trailListArray[index][6] = current.getActivities();
+				index++;
 			}
 		}
 
