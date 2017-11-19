@@ -66,6 +66,7 @@ public class Trail extends Observable implements Comparable<Trail> {
 		setActivities(activities);
 		setTrailMaintenance(closedForMaintenance);
 		setSnow(snow);
+		setDistance(distance);
 		if (d == null) {
 			throw new IllegalArgumentException("Difficulty cannot be null");
 		} else {
