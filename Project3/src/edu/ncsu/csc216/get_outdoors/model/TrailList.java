@@ -278,7 +278,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 		// if this is removed without updating Trail.trailOpen().
 		// TODO - Determine the correct behavior for this.
 		if (activity == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Activity cannot be null");
 		}
 		
 		// Counting number of open trails to intialize trailListArray's length.
