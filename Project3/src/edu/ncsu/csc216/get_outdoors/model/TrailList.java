@@ -382,7 +382,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 *   TrailList's Observer, GetOutdoorsManager, is notified of the change.
 	 *   
 	 * @param obs the Observable Object, either a Park or Trail.
-	 * @param arg the Observable Object, either a Park or Trail.
+	 * @param arg the Observer of this TrailList
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
