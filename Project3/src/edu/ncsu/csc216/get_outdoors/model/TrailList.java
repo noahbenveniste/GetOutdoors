@@ -39,7 +39,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 */
 	public TrailList(Park park) {
 		if (park == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Park cannot be null");
 		}
 
 		// This should be able to be removed. It shouldn't be possible 
