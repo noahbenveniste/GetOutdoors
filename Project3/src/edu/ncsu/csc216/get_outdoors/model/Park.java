@@ -12,7 +12,7 @@ import java.util.Observable;
  *   
  * @author demills
  */
-public class Park extends Observable {
+public class Park extends Observable implements Comparable<Park> {
 
 	/** The Park's unique, auto-generated ID. */
 	private String parkID;
@@ -122,7 +122,7 @@ public class Park extends Observable {
 	 * 
 	 * @return the most recent change in snow depth, in inches.
 	 */
-	public double getSnowChanged() {
+	public double getSnowChange() {
 		return snowChange;
 	}
 	
