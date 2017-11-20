@@ -101,7 +101,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * 
      * @return filename of the manager's save file.
      */
-    public String getFileName() {
+    public String getFilename() {
     	return filename;
     }
     
@@ -115,7 +115,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * @param filename the new save file's filename. 
      * @throws IllegalArgumentException if the filename is invalid.
      */
-    public void setFileName(String filename) {
+    public void setFilename(String filename) {
     	if (filename == null || filename.trim().equals("")) {
     		throw new IllegalArgumentException();
     	}
@@ -167,7 +167,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * 
      * @return returns the manager's number of TrailLists.
      */
-    public int getNumTrailsLists() {
+    public int getNumTrailLists() {
     	return numLists;
     }
     
