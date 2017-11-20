@@ -583,13 +583,17 @@ public class GetOutdoorsManager extends Observable implements Observer {
 			// new Parks have been added. If one has, it will not have an associated
 			// TrailList in "trailLists", so the new Park is passed to addTrailList().
 			for (int i = 0; i < parks.size(); i++) {
-				for (int j = 0; j < trailLists.length; j++) {
-					String currentParkName = parks.getParkAt(i).getName();
-					String currentTrailListName = trailLists[i].getParkName();
-					if (!(currentParkName.equals(currentTrailListName))){
-						addTrailList(parks.getParkAt(i));
-					}
-				} 
+				if (numLists == 0) {
+	                   addTrailList(parks.getParkAt(0));
+	                   return;
+	            }
+				String currentParkName = parks.getParkAt(i).getName();
+				for (int j = 0; j < numLists; j++) {
+				    String currentTrailListName = trailLists[j].getParkName();
+				    if (!(currentParkName.equals(currentTrailListName))){
+				        addTrailList(parks.getParkAt(i));
+				    }
+				}			
 			} // for
 		} // if
 		notifyObservers(this);

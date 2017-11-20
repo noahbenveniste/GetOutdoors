@@ -35,7 +35,7 @@ public class GetOutdoorsManagerTest {
 		//Check the contents of the manager
 		assertEquals(3, manager.getActivities().size());
 		assertEquals(2, manager.getParks().size());
-		assertEquals(2, manager.getTrailLists().length);
+		assertEquals(2, manager.getNumTrailLists());
 	}
 
 	@Test
