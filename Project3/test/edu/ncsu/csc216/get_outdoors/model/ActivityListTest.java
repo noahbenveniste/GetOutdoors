@@ -140,9 +140,9 @@ public class ActivityListTest {
 			
 			// Tests adding a duplicate Activity.
 			try {
-				assertFalse(activityList.addActivity(ACTIVITY_NAME, DESC, true, SNOW_BOUNDARY));
-			} catch (Exception e) {
-				fail("Unexpected Exception from addActivity().");
+				activityList.addActivity(ACTIVITY_NAME, DESC, true, SNOW_BOUNDARY);
+				fail("Should have thrown IlleglArgumentException.");
+			} catch (IllegalArgumentException e) {
 			}
 		} catch (Exception e) {
 			fail("Unexpected Exception in setUp().");

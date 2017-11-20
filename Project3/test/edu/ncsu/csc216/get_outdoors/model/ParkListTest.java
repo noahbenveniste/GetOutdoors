@@ -139,10 +139,12 @@ public class ParkListTest {
 			}
 			
 			// Tests adding a duplicate Park.
+			Park duplicatePark = null;
 			try {
-				assertFalse(parkList.addPark(PARK_NAME, DESC, SNOW_CHANGE));
-			} catch (Exception e) {
-				fail("Unexpected Exception from addPark().");
+				parkList.addPark(PARK_NAME, DESC, SNOW_CHANGE);
+				fail("Should have thrown IllegalArgumentException.");
+			} catch (IllegalArgumentException e) {
+				assertNull(duplicatePark);
 			}
 		} catch (Exception e) {
 			fail("Unexpected Exception in setUp().");

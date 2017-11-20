@@ -77,8 +77,11 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 */
 	@Override
 	public boolean add(E element) {
-		if (element == null || contains(element)) {
-			return false;
+		if (element == null) {
+			throw new NullPointerException("Null elements not allowed in list."); 
+		}
+		if (contains(element)) {
+			throw new IllegalArgumentException("Duplicates not allowed in list."); 
 		}
 		return head.add(element);
 	}
