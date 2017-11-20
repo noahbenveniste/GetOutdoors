@@ -178,7 +178,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * @param index the index from which to return a TrailList.
      */
     public TrailList getTrailList(int index) {
-    	if (index < 0 || index >= trailLists.length) {
+    	if (index < 0 || index >= numLists) {
     		throw new IndexOutOfBoundsException();
     	}
     	return trailLists[index];
