@@ -12,8 +12,14 @@ import org.junit.Test;
  */
 public class GetOutdoorsManagerTest {
 
+	/** */
+	private GetOutdoorsManager manager;
+	
+	private static final String VALID_FILE= "test-files/NCSU.md";
+	
 	@Before
 	public void setUp() {
+		manager = new GetOutdoorsManager();
 	}
 
 	@Test
@@ -22,68 +28,74 @@ public class GetOutdoorsManagerTest {
 	}
 	
 	@Test
+	public void testOpenDataFile() {
+		//Read in valid data file
+		manager.openDataFile(VALID_FILE);
+		
+		//Check the contents of the manager
+		assertEquals(3, manager.getActivities().size());
+		assertEquals(2, manager.getParks().size());
+		assertEquals(2, manager.getTrailLists().length);
+	}
+
+	@Test
 	public void testIsChanged() {
-		fail();
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testSetChanged() {
-		fail();
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testGetFilename() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testSetFilename() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testGetNumTrailLists() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testGetTrailListInt() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testGetTrailLists() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testGetActivities() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testAddTrailListPark() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testGetParks() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testSaveDataFile() {
-		
-	}
-	
-	@Test
-	public void testOpenDataFile() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testUpdate() {
-		
+		fail("Not yet implemented");
 	}
 	
 }
