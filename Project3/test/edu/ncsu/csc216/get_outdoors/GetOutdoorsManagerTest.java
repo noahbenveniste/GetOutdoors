@@ -9,6 +9,7 @@ import edu.ncsu.csc216.get_outdoors.enums.Difficulty;
 import edu.ncsu.csc216.get_outdoors.model.Activity;
 import edu.ncsu.csc216.get_outdoors.model.ActivityList;
 import edu.ncsu.csc216.get_outdoors.model.Park;
+import edu.ncsu.csc216.get_outdoors.model.ParkList;
 import edu.ncsu.csc216.get_outdoors.model.TrailList;
 import edu.ncsu.csc216.get_outdoors.util.SortedArrayList;
 
@@ -28,11 +29,6 @@ public class GetOutdoorsManagerTest {
 	public void setUp() {
 		manager = new GetOutdoorsManager();
 	}
-
-	@Test
-	public void testGetOutdoorsManager() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	public void testOpenDataFile() {
@@ -43,56 +39,45 @@ public class GetOutdoorsManagerTest {
 		assertEquals(3, manager.getActivities().size());
 		assertEquals(2, manager.getParks().size());
 		assertEquals(2, manager.getNumTrailLists());
-	}
-
-	@Test
-	public void testIsChanged() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testSetChanged() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testGetFilename() {
-		fail("Not yet implemented");
+		
+		//Loading an invalid data files
+		manager = null;
+		manager = new GetOutdoorsManager();
+		try {
+			manager.openDataFile("test-files/invalid.md");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("File must start with the ACTIVITY information.", e.getMessage());
+		}
+		
+		try {
+			manager.openDataFile("test-files/invalid.md");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("File must start with the ACTIVITY information.", e.getMessage());
+		}
 	}
 	
 	@Test
 	public void testSetFilename() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testGetNumTrailLists() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testGetTrailListInt() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testGetTrailLists() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testGetActivities() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testAddTrailListPark() {
-		fail("Not yet implemented");
+		try {
+			manager.setFilename("");
+		} catch (IllegalArgumentException e) {
+			assertNull(manager.getFilename());
+		}
+		manager.setFilename("file.md");
+		assertEquals("file.md", manager.getFilename());
 	}
 	
 	@Test
 	public void testGetParks() {
-		fail("Not yet implemented");
+		manager.openDataFile(VALID_FILE);
+		ParkList exp = new ParkList();
+		exp.addPark("Main Campus", "Lovely park on Main Campus", 0.0);
+		exp.addPark("Centennial Campus", "Park contained on Engineering Campus", 1.0);
+		for (int i = 0; i < exp.size(); i++) {
+			assertEquals(0, (exp.getParkAt(i)).compareTo(manager.getParks().getParkAt(i)));
+		}
 	}
 	
 	@Test
@@ -138,6 +123,23 @@ public class GetOutdoorsManagerTest {
         TrailList trailList5 = new TrailList(park5);
         TrailList trailList6 = new TrailList(park6);
         
+        // Tests that negative index throws IAE.
+        TrailList shouldBeNull = null;
+        try {
+        	shouldBeNull = manager.getTrailList(-1);
+        	fail("Should have thrown IOOBE.");
+        } catch (IndexOutOfBoundsException e) {
+        	assertNull(shouldBeNull);
+        }
+        
+        // Tests that index equal to "trailLists" size throws IAE.
+        try {
+        	shouldBeNull = manager.getTrailList(manager.getNumTrailLists());
+        	fail("Should have thrown IOOBE.");
+        } catch (IndexOutOfBoundsException e) {
+        	assertNull(shouldBeNull);
+        }
+        
         assertEquals(-1 , manager.addTrailList(null));
         assertEquals(0, manager.addTrailList(park3));
         assertEquals(1, manager.addTrailList(park4));
@@ -150,11 +152,30 @@ public class GetOutdoorsManagerTest {
         assertEquals(trailList4, manager.getTrailList(1));
         assertEquals(trailList5, manager.getTrailList(2));
         assertEquals(trailList6, manager.getTrailList(3));
+        
+        // Tests that negative index throws IAE.
+        shouldBeNull = null;
+        try {
+        	shouldBeNull = manager.getTrailList(-1);
+        	fail("Should have thrown IOOBE.");
+        } catch (IndexOutOfBoundsException e) {
+        	assertNull(shouldBeNull);
+        }
+        
+        // Tests that index equal to "trailLists" size throws IAE.
+        try {
+        	shouldBeNull = manager.getTrailList(manager.getNumTrailLists());
+        	fail("Should have thrown IOOBE.");
+        } catch (IndexOutOfBoundsException e) {
+        	assertNull(shouldBeNull);
+        }
+        
+        // Testing getTrailLists().
+        TrailList[] trailListArray = manager.getTrailLists();
+        assertEquals(trailList3, trailListArray[0]);
+        assertEquals(trailList4, trailListArray[1]);
+        assertEquals(trailList5, trailListArray[2]);
+        assertEquals(trailList6, trailListArray[3]);
     }
-	
-	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
-	}
 	
 }
