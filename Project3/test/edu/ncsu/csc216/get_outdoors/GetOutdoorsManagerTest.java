@@ -90,7 +90,16 @@ public class GetOutdoorsManagerTest {
 	
 	@Test
 	public void testSaveDataFile() {
-		fail("Not yet implemented");
+		//Read in valid data file
+		manager.openDataFile(VALID_FILE);
+		//Add an activity for all parks to use
+		manager.getActivities().addActivity("Fish", "Freshwater fishing", false, 1);
+		assertEquals(4, manager.getActivities().size());
+		//Add a park; the manager will create an empty trail list for it
+		manager.getParks().addPark("Pullen Park", "Located on the northern end of campus", 0.0);
+		assertEquals(3, manager.getParks().size());
+		assertEquals(3, manager.getNumTrailLists());
+		//fail("Not yet implemented");
 	}
 	
 	@Test
