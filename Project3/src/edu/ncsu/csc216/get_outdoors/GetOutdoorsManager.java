@@ -1,10 +1,8 @@
 package edu.ncsu.csc216.get_outdoors;
 
-import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -245,7 +243,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * Increases the size of the TrailList array when it is at capacity.
      */
     private void growTrailListArray() {
-    	TrailList[] newTrailLists = new TrailList[trailLists.length * 2];
+    	TrailList[] newTrailLists = new TrailList[trailLists.length + RESIZE];
     	for (int i = 0; i < trailLists.length; i++) {
     		newTrailLists[i] = trailLists[i];
     	}
