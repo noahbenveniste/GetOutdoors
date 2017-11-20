@@ -149,6 +149,9 @@ public class ParkListTest {
 		}
 	}
 
+	/**
+	 * Tests ParkList.get2DArray().
+	 */
 	@Test
 	public void testGet2DArray() {
 		try {
