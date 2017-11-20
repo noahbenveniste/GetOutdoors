@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.get_outdoors;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -59,6 +60,71 @@ public class GetOutdoorsManager extends Observable implements Observer {
     private boolean changed;
 
     /**
+     * Constructs the GetOutdoorsManager, performing the following actions: 
+     * - A list of TraiLists is initialized,
+     * - A single ActivityList is created with this instance as its Observer.
+     * - A single ParkList is created with this instance as its Observer.
+     * - The boolean "changed" is set to false, indicating no change since last save.
+     */
+    public GetOutdoorsManager() {
+    	trailLists = new TrailList[3];
+    	changed = false;
+    	numLists = 0;
+
+    	activities = new ActivityList();
+    	parks = new ParkList();
+
+    	activities.addObserver(this);
+    	parks.addObserver(this);
+    }
+    
+    /**
+     * Returns whether the manager has changed since the last save.
+     * True if it has, false if not.
+     * 
+     * @return returns true if manager has changed since last save; false otherwise.
+     */
+    public boolean isChanged() {
+    	return changed;
+    }
+    
+    /**
+     * Sets the value of the "changed" field to the passed value, indicating
+     *   whether or not the manager has changed since the last save.
+     * 
+     * @param changed whether the manager has changed since the last save.
+     */
+    public void setChanged(boolean changed) {
+    	this.changed = changed;
+    }
+    
+    /**
+     * Returns the filename of the file that the manager is saving its data to.
+     * 
+     * @return filename of the manager's save file.
+     */
+    public String getFileName() {
+    	return filename;
+    }
+    
+    /**
+     * Sets the save file's filename to the passed String, if valid.
+     * A valid filename must be non-empty, non-null, and contain at 
+     *   least one non-whitespace character. For valid Strings, leading 
+     *   and trailing whitespace will be trimmed.
+     * If the argument is invalid, an IllegalArgumentException is thrown.
+     *   
+     * @param filename the new save file's filename. 
+     * @throws IllegalArgumentException if the filename is invalid.
+     */
+    public void setFileName(String filename) {
+    	if (filename == null || filename.trim().equals("")) {
+    		throw new IllegalArgumentException();
+    	}
+    	this.filename = filename.trim();
+    }
+
+    /**
      * Saves the GetOutdoorsManager to file.
      * 
      * @param filename filename to save GetOutdoorsManager information to.
@@ -97,6 +163,94 @@ public class GetOutdoorsManager extends Observable implements Observer {
             }
         }
     }
+    
+    /**
+     * Returns the number of TrailLists currently in the system.
+     * 
+     * @return returns the manager's number of TrailLists.
+     */
+    public int getNumTrailsLists() {
+    	return numLists;
+    }
+    
+    /**
+     * Returns the TrailList at the specified index in the manager's 
+     *   array of TrailLists.
+     * 
+     * @param index the index from which to return a TrailList.
+     */
+    public TrailList getTrailList(int index) {
+    	if (index < 0 || index >= trailLists.length) {
+    		throw new IndexOutOfBoundsException();
+    	}
+    	return trailLists[index];
+    }
+    
+    /**
+     * Returns an array of TrailLists in the system.
+     * 
+     * @return returns an array of TrailLists in the system.
+     */
+    public TrailList[] getTrailLists() {
+    	return trailLists;
+    }
+    
+    /**
+     * Returns the system's ActivityList.
+     * 
+     * @return the system's ActivityList
+     */
+    public ActivityList getActivities() {
+    	return activities;
+    }
+    
+    /**
+     * Returns the system's ParkList.
+     * 
+     * @return returns the system's ParkList.
+     */
+    public ParkList getParks() {
+    	return parks;
+    }
+
+    /**
+     * Adds the passed park's TrailList to the system's array of TrailLists.
+     * This manager instance is added as an Observer of the added TrailList.
+     * 
+     * @param park 
+     * @return
+     */
+    public int addTrailList(Park park) {
+
+    	TrailList newList;
+    	// Returns -1 if TrailList cannot be created.
+    	try {
+    		newList = new TrailList(park);
+    	} catch (IllegalArgumentException e) {
+    		return -1;
+    	}
+
+    	// Grows "trailLists" array if full.
+    	if (trailLists.length == numLists) {
+    		growTrailListArray();
+    	}
+
+    	newList.addObserver(this);
+    	trailLists[numLists] = newList; 
+    	numLists++;
+    	return numLists - 1;
+    }
+    
+    /**
+     * Increases the size of the TrailList array when it is at capacity.
+     */
+    private void growTrailListArray() {
+    	TrailList[] newTrailLists = new TrailList[trailLists.length * 2];
+    	for (int i = 0; i < trailLists.length; i++) {
+    		newTrailLists[i] = trailLists[i];
+    	}
+    	trailLists = newTrailLists;
+    }
 
     /**
      * Opens a data file with the given name and creates the data structures from
@@ -117,7 +271,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
                 processLine(line);
             }
 
-            setChanged(true);
+            setChanged();
             notifyObservers(this);
             changed = false;
             fileIn.close();
@@ -412,6 +566,35 @@ public class GetOutdoorsManager extends Observable implements Observer {
                 }
             }
         }
-
     }
+
+    /**
+     * If one of the manager's Observed objects (ActivityList, ParkList,
+     *   or TrailList) changes, update() is called. 
+     * If "obs" is the "parks" ParkList, the list is iterated through 
+     *   to check that each Park has a TrailList in "trailLists. If a park
+     *   has no associated TrailList there, one is added.
+     * For each case, the manager notifies its observers of the change and sets 
+     *   "changed" to true.
+     *   
+     * @param obs the Observed object, who has just called notifyObservers().
+     */
+	@Override
+	public void update(Observable obs, Object arg) {
+		if (parks.equals(obs)) { // Updated ParkList case
+			// The updated "parks" ParkList is iterated through to see if any 
+			// new Parks have been added. If one has, it will not have an associated
+			// TrailList in "trailLists", so the new Park is passed to addTrailList().
+			for (int i = 0; i < parks.size(); i++) {
+				for (int j = 0; j < trailLists.length; j++) {
+					String currentParkName = parks.getParkAt(i).getName();
+					String currentTrailListName = trailLists[i].getParkName();
+					if (!(currentParkName.equals(currentTrailListName))){
+						addTrailList(parks.getParkAt(i));
+					}
+				} 
+			} // for
+		} // if
+		notifyObservers(this);
+	}
 }
