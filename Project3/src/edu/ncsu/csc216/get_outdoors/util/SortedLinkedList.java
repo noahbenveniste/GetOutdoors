@@ -77,11 +77,11 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 */
 	@Override
 	public boolean add(E element) {
-		if (contains(element)) {
-			throw new IllegalArgumentException("Duplicate elements not allowed in list.");
-		}
 		if (element == null) {
-			throw new NullPointerException("Null elements not allowed in list.");
+			throw new NullPointerException("Null elements not allowed in list."); 
+		}
+		if (contains(element)) {
+			throw new IllegalArgumentException("Duplicates not allowed in list."); 
 		}
 		return head.add(element);
 	}
@@ -295,7 +295,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		 */
 		public boolean contains(E element) {
 			// Case at the end of the list, of any size.
-			if (data.equals(element)) {
+			if (data.equals(element) || data.compareTo(element) == 0) {
 				return true;
 			} else if (next == null) {
 				return false;

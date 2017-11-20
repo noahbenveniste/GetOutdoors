@@ -104,7 +104,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		//Check for repeat elements
 		for (int i = 0; i < this.size(); i++) {
 			if (this.list[i].equals(e)) {
-				throw new IllegalArgumentException("Cannot add repeat elements");
+				throw new IllegalArgumentException("Cannot add duplicate elements.");
 			}
 		}
 		
