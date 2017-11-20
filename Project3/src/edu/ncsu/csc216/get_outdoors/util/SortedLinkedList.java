@@ -80,9 +80,6 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		if (contains(element)) {
 			throw new IllegalArgumentException("Duplicate elements not allowed in list.");
 		}
-		if (element == null) {
-			throw new NullPointerException("Null elements not allowed in list.");
-		}
 		return head.add(element);
 	}
 
