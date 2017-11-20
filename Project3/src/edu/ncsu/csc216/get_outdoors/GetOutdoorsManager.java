@@ -588,12 +588,18 @@ public class GetOutdoorsManager extends Observable implements Observer {
 	                   return;
 	            }
 				String currentParkName = parks.getParkAt(i).getName();
+				boolean noTrailList = true;
 				for (int j = 0; j < numLists; j++) {
 				    String currentTrailListName = trailLists[j].getParkName();
-				    if (!(currentParkName.equals(currentTrailListName))){
-				        addTrailList(parks.getParkAt(i));
+				    //If the current park has a trail list
+				    if (currentParkName.equals(currentTrailListName)) {
+				        noTrailList = false;
 				    }
-				}			
+				}
+				//If no trail list was found for the current park
+				if (noTrailList) {
+					addTrailList(parks.getParkAt(i));
+				}
 			} // for
 		} // if
 		notifyObservers(this);
