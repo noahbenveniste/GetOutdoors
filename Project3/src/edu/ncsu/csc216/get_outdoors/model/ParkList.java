@@ -12,7 +12,7 @@ import edu.ncsu.csc216.get_outdoors.util.SortedLinkedList;
 public class ParkList extends Observable implements Observer, Tabular {
 
 	/** */
-	private String name;
+	private String parkListName;
 	/** */
 	private int numParks;
 	/** */
@@ -22,9 +22,9 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 * 
 	 */
 	public ParkList() {
-		this.name = "Parks";
-		this.numParks = 0;
-		this.parks = new SortedLinkedList<Park>();
+		parkListName = "Parks";
+		numParks = 0;
+		parks = new SortedLinkedList<Park>();
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 * @return
 	 */
 	public String getName() {
-		return this.name;
+		return parkListName;
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 		if (index < 0 || index >= parks.size()) {
 			throw new IndexOutOfBoundsException("Index is outside of the acceptable range");
 		} else {
-			return this.parks.get(index);
+			return parks.get(index);
 		}
 	}
 	
@@ -85,7 +85,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 * @return
 	 */
 	public int size() {
-		return this.parks.size();
+		return parks.size();
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 * @return
 	 */
 	public boolean isEmpty() {
-		return this.parks.isEmpty();
+		return parks.isEmpty();
 	}
 	
 	/**
@@ -103,7 +103,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 */
 	public int indexOfID(String id) {
 		int index = -1;
-		for (int i = 0; i < this.parks.size(); i++) {
+		for (int i = 0; i < parks.size(); i++) {
 			if ((parks.get(i).getParkID()).equals(id)) {
 				index = i;
 			}
@@ -116,9 +116,9 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 */
 	@Override
 	public Object[][] get2DArray() {
-		Object[][] arr = new Object[this.parks.size()][4];
-		for (int i = 0; i < this.parks.size(); i++) {
-			Park current = this.parks.get(i);
+		Object[][] arr = new Object[parks.size()][4];
+		for (int i = 0; i < parks.size(); i++) {
+			Park current = parks.get(i);
 			arr[i][0] = current.getParkID();
 			arr[i][1] = current.getName();
 			arr[i][2] = current.getDescription();
@@ -134,9 +134,8 @@ public class ParkList extends Observable implements Observer, Tabular {
 	public void update(Observable o, Object arg) {
 		//If the passed park (observable o) is contained in the activities list, notify observers
 		Park p = (Park) o;
-		if (this.parks.contains(p)) {
+		if (parks.contains(p)) {
 			notifyObservers(arg);
 		}
 	}
-
 }
