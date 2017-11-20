@@ -42,12 +42,6 @@ public class TrailList extends Observable implements Observer, Tabular {
 			throw new IllegalArgumentException("Park cannot be null");
 		}
 
-		// This should be able to be removed. It shouldn't be possible 
-		// for a Park to ever return a null parkID value.
-		if (park.getParkID() == null) {
-			throw new IllegalArgumentException("Park parmeter has null ID.");
-		}
-
 		trailListID = park.getParkID();
 		trails = new SortedArrayList<Trail>();
 		numTrails = 0;
