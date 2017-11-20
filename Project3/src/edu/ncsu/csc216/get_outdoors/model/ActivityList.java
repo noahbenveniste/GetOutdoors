@@ -22,7 +22,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	 * 
 	 */
 	public ActivityList() {
-		this.name = "Activities";
+		name = "Activities";
 		activities = new SortedArrayList<Activity>();
 		numActivities = 0;
 		setChanged(); //Marks the Observable as changed
@@ -35,7 +35,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	 * @return
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 		if (index < 0 || index >= activities.size()) {
 			throw new IndexOutOfBoundsException("Index is outside of the acceptable range");
 		} else {
-			return this.activities.get(index);
+			return activities.get(index);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	 * @return
 	 */
 	public int size() {
-		return this.activities.size();
+		return activities.size();
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	 * @return
 	 */
 	public boolean isEmpty() {
-		return this.activities.isEmpty();
+		return activities.isEmpty();
 	}
 	
 	/**
@@ -105,9 +105,9 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	 */
 	@Override
 	public Object[][] get2DArray() {
-		Object[][] arr = new Object[this.activities.size()][5];
-		for (int i = 0; i < this.activities.size(); i++) {
-			Activity current = this.activities.get(i);
+		Object[][] arr = new Object[activities.size()][5];
+		for (int i = 0; i < activities.size(); i++) {
+			Activity current = activities.get(i);
 			arr[i][0] = current.getActivityID();
 			arr[i][1] = current.getName();
 			arr[i][2] = current.getDescription();
@@ -124,7 +124,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	 */
 	public int indexOfID(String id) {
 		int index = -1;
-		for (int i = 0; i < this.activities.size(); i++) {
+		for (int i = 0; i < activities.size(); i++) {
 			if ((activities.get(i).getActivityID()).equals(id)) {
 				index = i;
 			}
@@ -141,7 +141,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	public void update(Observable o, Object arg) {
 		//If the passed activity (observable o) is contained in the activities list, notify observers
 		Activity a = (Activity) o;
-		if (this.activities.contains(a)) {
+		if (activities.contains(a)) {
 			notifyObservers(arg);
 		}
 	}
