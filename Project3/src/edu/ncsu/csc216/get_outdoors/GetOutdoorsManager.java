@@ -232,18 +232,6 @@ public class GetOutdoorsManager extends Observable implements Observer {
     	if (trailLists.length == numLists) {
     		growTrailListArray();
     	}
-    	
-    	// Adds Activities in the TrailList to "activities".
-    	for (int i = 0; i < activities.size(); i++) {
-    		Activity existingActivity = activities.getActivityAt(i);
-    		for (int j = 0; j < newList.get2DArray().length; j++) {
-    			Activity current = (Activity) newList.get2DArray()[j][6];
-    			if (!(current.equals(existingActivity))) {
-    				activities.addActivity(current.getName(), current.getDescription(), 
-    						               current.snowNeeded(), current.getSnowBoundary());
-    			}
-    		}
-    	}
 
     	newList.addObserver(this);
     	trailLists[numLists] = newList; 
