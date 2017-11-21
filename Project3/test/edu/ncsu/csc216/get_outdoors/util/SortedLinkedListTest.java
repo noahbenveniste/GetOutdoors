@@ -301,5 +301,37 @@ public class SortedLinkedListTest {
 			assertEquals("[a, b, c]", list.toString());
 		}
 	}
+	
+	@SuppressWarnings("unlikely-arg-type")
+	@Test
+	public void testEquals() {
+		try {
+			setUp();
+			
+			// Tests the passing null element returns false.
+			assertFalse(list.equals(null));
+
+			// Tests that passing non-SortedLinkedList type returns false.
+			assertFalse(list.equals("Not a SortedLinkedList."));
+
+			// Tests that passing list of unequal size returns false.
+			SortedLinkedList<String> otherList = new SortedLinkedList<String>();
+			list.add("apple");
+			list.add("banana");
+			otherList.add("apple");
+			assertFalse(otherList.equals(list));
+
+			// Tests that passing equal size list with distinct elements returns false.
+			otherList.add("carrot");
+			assertFalse(otherList.equals(list));
+
+			// Tests that lists of equal size and matching elements return true.
+			otherList.remove(1);
+			otherList.add("banana");
+			assertTrue(otherList.equals(list));
+		} catch (Exception e) {
+			fail("Unexpected Exception thrown.");
+		}
+	}
 
 }
