@@ -602,6 +602,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
 				}
 			} // for
 		} // if
+		setChanged();
 		notifyObservers(this);
 	}
 }
