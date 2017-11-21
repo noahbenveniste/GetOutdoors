@@ -66,6 +66,14 @@ public class ActivityList extends Observable implements Observer, Tabular {
 			a.addObserver(this);
 			return true;
 		} else {
+			//Marks the Observable as changed
+			setChanged(); 
+			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
+			// The current instance is passed in except in specific instance listed in the detailed method descriptions, below.
+			
+			//Add this object to the created activity as an observer
+			a.addObserver(this);
+			
 			//Return false if the activity is already in the list
 			return false;
 		}
@@ -140,8 +148,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	@Override
 	public void update(Observable o, Object arg) {
 		//If the passed activity (observable o) is contained in the activities list, notify observers
-		Activity a = (Activity) o;
-		if (activities.contains(a)) {
+		if (o instanceof Activity && activities.contains((Activity) o)) {
 			notifyObservers(arg);
 		}
 	}
