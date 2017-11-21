@@ -578,7 +578,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      */
 	@Override
 	public void update(Observable obs, Object arg) {
-		if (parks.equals(obs)) { // Updated ParkList case
+		if (obs instanceof ParkList && parks.equals((ParkList) obs)) { // Updated ParkList case
 			// The updated "parks" ParkList is iterated through to see if any 
 			// new Parks have been added. If one has, it will not have an associated
 			// TrailList in "trailLists", so the new Park is passed to addTrailList().
