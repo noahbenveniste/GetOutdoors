@@ -146,6 +146,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	public void update(Observable o, Object arg) {
 		//If the passed activity (observable o) is contained in the activities list, notify observers
 		if (o instanceof Activity && activities.contains((Activity) o)) {
+			setChanged();
 			notifyObservers(arg);
 		}
 	}
