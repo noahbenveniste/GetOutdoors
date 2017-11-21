@@ -7,6 +7,10 @@ import edu.ncsu.csc216.get_outdoors.util.SortedLinkedList;
 
 /**
  * 
+ * ParkList is both OBSERVABLE by GetOutdoorsManager and an OBSERVER of Park.
+ * ParkList also implements the Tabular interface to output its data as an array
+ *   for easy display via the UI classes.
+ * 
  * @author Noah Benveniste
  */
 public class ParkList extends Observable implements Observer, Tabular {
@@ -25,6 +29,8 @@ public class ParkList extends Observable implements Observer, Tabular {
 		parkListName = "Parks";
 		numParks = 0;
 		parks = new SortedLinkedList<Park>();
+		setChanged(); //Marks the Observable as changed
+		notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
 	}
 	
 	/**
@@ -143,4 +149,5 @@ public class ParkList extends Observable implements Observer, Tabular {
 			notifyObservers(arg);
 		}
 	}
+	
 }
