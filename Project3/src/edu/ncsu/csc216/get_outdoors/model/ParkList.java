@@ -62,6 +62,11 @@ public class ParkList extends Observable implements Observer, Tabular {
 			p.addObserver(this);
 			return true;
 		} else {
+			//Marks the Observable as changed
+			setChanged(); 
+			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
+			// The current instance is passed in except in specific instance listed in the detailed method descriptions, below.
+			
 			//Return false if the activity is already in the list
 			return false;
 		}
@@ -133,8 +138,8 @@ public class ParkList extends Observable implements Observer, Tabular {
 	@Override
 	public void update(Observable o, Object arg) {
 		//If the passed park (observable o) is contained in the activities list, notify observers
-		Park p = (Park) o;
-		if (parks.contains(p)) {
+		if (o instanceof Park && parks.contains((Park) o)) {
+			setChanged();
 			notifyObservers(arg);
 		}
 	}
