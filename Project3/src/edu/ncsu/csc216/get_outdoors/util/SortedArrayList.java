@@ -260,6 +260,9 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	 */
 	@Override
 	public String toString() {
+		if (size() == 0) {
+			return "[]";
+		}
 		//Fence-post
 		String out = "[" + get(0).toString();
 		//Concatenate the string
