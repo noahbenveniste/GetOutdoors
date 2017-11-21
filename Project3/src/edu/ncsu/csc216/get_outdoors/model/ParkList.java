@@ -6,7 +6,9 @@ import java.util.Observer;
 import edu.ncsu.csc216.get_outdoors.util.SortedLinkedList;
 
 /**
- * 
+ * A container object for Park objects. Uses a SortedLinkedList as an underlying data
+ *   structure. Has a composition relationship with Park objects in the context of 
+ *   GetOutdoors, as Park objects are only constructed through ParkList.addPark().
  * ParkList is both OBSERVABLE by GetOutdoorsManager and an OBSERVER of Park.
  * ParkList also implements the Tabular interface to output its data as an array
  *   for easy display via the UI classes.
@@ -15,15 +17,16 @@ import edu.ncsu.csc216.get_outdoors.util.SortedLinkedList;
  */
 public class ParkList extends Observable implements Observer, Tabular {
 
-	/** */
+	/** The name of the ParkList */
 	private String parkListName;
-	/** */
+	/** The number of Parks in the ParkList */
 	private int numParks;
-	/** */
+	/** The underlying list data structure */
 	private SortedLinkedList<Park> parks;
 	
 	/**
-	 * 
+	 * Constructs a ParkList with a default name of "Parks". Initializes the numParks field
+	 * and constructs an empty SortedLinkedList of Park objects for the underlying list data structure.
 	 */
 	public ParkList() {
 		parkListName = "Parks";
@@ -34,14 +37,16 @@ public class ParkList extends Observable implements Observer, Tabular {
 	}
 	
 	/**
+	 * Gets the name of the ParkList.
 	 * 
-	 * @return
+	 * @return the name.
 	 */
 	public String getName() {
 		return parkListName;
 	}
 	
 	/**
+	 * Adds a Park to the ParkList. Auto generates a unique ID.
 	 * 
 	 * @param name
 	 * @param description
@@ -56,24 +61,26 @@ public class ParkList extends Observable implements Observer, Tabular {
 		//i.e. it is not a duplicate of one in the list i.e. it doesn't have the same name as one 
 		//already in the list
 		if (parks.add(p)) {
+			
 			//Increment the number of parks
 			numParks++;
 			
 			//Marks the Observable as changed
 			setChanged(); 
 			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
-			// The current instance is passed in except in specific instance listed in the detailed method descriptions, below.
 			
 			//Add this object to the created activity as an observer
 			p.addObserver(this);
+			
+			//Return true if the Park was successfully added
 			return true;
 		} else {
+			
 			//Marks the Observable as changed
 			setChanged(); 
 			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
-			// The current instance is passed in except in specific instance listed in the detailed method descriptions, below.
 			
-			//Return false if the activity is already in the list
+			//Return false if the Park is already in the list
 			return false;
 		}
 	}
