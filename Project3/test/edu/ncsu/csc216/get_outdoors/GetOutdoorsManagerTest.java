@@ -22,7 +22,7 @@ public class GetOutdoorsManagerTest {
 	/** Manager object to be used throughout testing */
 	private GetOutdoorsManager manager;
 	/** Name of valid file to be used */
-	private static final String VALID_FILE= "test-files/NCSU.md";
+	private static final String VALID_FILE = "test-files/NCSU.md";
 	
 	/**
 	 * Sets up manager object for tests
