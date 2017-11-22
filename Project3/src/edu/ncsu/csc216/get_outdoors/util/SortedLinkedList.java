@@ -77,12 +77,9 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 */
 	@Override
 	public boolean add(E element) {
-		if (element == null) {
-			throw new NullPointerException("Null elements not allowed in list."); 
-		}
 		if (contains(element)) {
-			throw new IllegalArgumentException("Duplicates not allowed in list."); 
-		}
+			throw new IllegalArgumentException("Duplicate elements not allowed in list.");
+    }
 		return head.add(element);
 	}
 
@@ -134,38 +131,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		return head.indexOf(element, 0);
 	}
 
-	// TODO - Implement hashCode() method once the implementation details are determined.
 
-	/**
-	 * Returns whether this SortedLinkedList is equal to the parameter.
-	 * This is considered true the lists are of equal length, both of type
-	 *   SortedLinkedList, with identical elements in the same order.
-	 * 
-	 * @returns true if the parameter equals this object; false otherwise.
-	 * @param other the Object to compare to this instance.
-	 */
-	@Override
-	public boolean equals(Object other) {
-		if (other == null) {
-			return false;
-		}
-		if (!(other instanceof SortedLinkedList)) {
-			return false;
-		}
-
-		@SuppressWarnings("unchecked")
-		SortedLinkedList<E> otherList = (SortedLinkedList<E>) other;
-		if (otherList.size() != size()) {
-			return false;
-		}
-		
-		for (int i = 0; i < size(); i++) {
-			if (!(otherList.get(i).equals(get(i)))) {
-				return false;
-			}
-		}
-		return true;
-	}
 
 	/**
 	 * Returns a String representation of the list formatted as.
@@ -190,6 +156,55 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		return returnString;
 	}
 	
+
+	
+	/**
+	 * Generates and returns an integer hash of the "head" Node.
+	 * This value is calculated recursively, by calling head.hashCode(),
+	 *   which itself will call next.hashCode() for its next Node. In this
+	 *   way, every Node in the list will contribute to the final value
+	 *   returned here.
+	 *   
+	 * @return returns an integer hash of the SortedLinkedList.
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((head == null) ? 0 : head.hashCode());
+		return result;
+	}
+
+	/**
+	 * Returns whether this SortedLinkedList is equal to the parameter.
+	 * This is considered true the lists are of equal length, both of type
+	 *   SortedLinkedList, with identical elements in the same order.
+	 *
+	 * @returns true if the parameter equals this object; false otherwise.
+	 * @param other the Object to compare to this instance.
+	 */
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) {
+			return false;
+		}
+		if (!(other instanceof SortedLinkedList)) {
+			return false;
+		}
+		@SuppressWarnings("unchecked")
+		SortedLinkedList<E> otherList = (SortedLinkedList<E>) other;
+		if (otherList.size() != size()) {
+			return false;
+		}
+
+		for (int i = 0; i < size(); i++) {
+			if (!(otherList.get(i).equals(get(i)))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * An inner class for the individual nodes in the linked list. Each Node stores
 	 *   an element E, and a reference to the next Node in the list, which may be null.
@@ -197,7 +212,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 * @author demills
 	 * @param <E> the element type stored in the list.
 	 */
-	private class Node {
+	public class Node {
 		
 		/** The element stored in this node of the linked list. */
 		E data;
@@ -319,6 +334,20 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 			} else {
 				return next.remove(index - 1);
 			}
+		}
+
+		/**
+		 * Returns a integer hash of the Node's "next" and "data" fields.
+		 * 
+		 * @return returns an integer hash of the Node.
+		 */
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((data == null) ? 0 : data.hashCode());
+			result = prime * result + ((next == null) ? 0 : next.hashCode());
+			return result;
 		}
 	}
 }
