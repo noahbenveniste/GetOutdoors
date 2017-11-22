@@ -234,6 +234,8 @@ public class GetOutdoorsManager extends Observable implements Observer {
     	}
 
     	newList.addObserver(this);
+    	setChanged();
+    	notifyObservers(this);
     	trailLists[numLists] = newList; 
     	numLists++;
     	return numLists - 1;
@@ -607,4 +609,5 @@ public class GetOutdoorsManager extends Observable implements Observer {
 		setChanged();
 		notifyObservers(arg);
 	}
+	
 }
