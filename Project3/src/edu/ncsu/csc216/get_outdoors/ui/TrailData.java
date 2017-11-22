@@ -28,13 +28,13 @@ public class TrailData implements Data {
     /**
      * Creates a TrailData object from all fields.
      * 
-     * @param trailID
-     * @param trailName
-     * @param closedForMaintenance
-     * @param snow
-     * @param distance
-     * @param difficulty
-     * @param activities
+     * @param trailID the Trail's ID
+     * @param trailName the Trail's name
+     * @param closedForMaintenance whether or not the Trail is closed for maintenance
+     * @param snow the amount of snow on the Trail
+     * @param distance the length of the Trail
+     * @param difficulty the Trail's difficulty level
+     * @param activities the available activities for the Trail
      */
     public TrailData(String trailID, String trailName, boolean closedForMaintenance, double snow,
             double distance, Difficulty difficulty, SortedArrayList<Activity> activities) {

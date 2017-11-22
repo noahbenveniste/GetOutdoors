@@ -25,7 +25,7 @@ public class ParkTab extends Tab {
     /**
      * Constructs the ParkTab with the given ParkList.
      * 
-     * @param ParkList list of parks to display
+     * @param parks list of parks to display
      */
     public ParkTab(ParkList parks) {
         super();

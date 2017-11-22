@@ -116,6 +116,8 @@ public class FilterTab extends JPanel implements ActionListener {
     }
 
     /**
+     * Gets the ListPane
+     * 
      * @return the listPane
      */
     protected ListPane getListPane() {
