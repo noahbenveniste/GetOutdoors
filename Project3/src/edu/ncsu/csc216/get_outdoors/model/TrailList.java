@@ -390,11 +390,15 @@ public class TrailList extends Observable implements Observer, Tabular {
 		}
 		if (obs instanceof Park) {
 			Park observedPark = (Park) obs;
-			for (int i = 0; i < trails.size(); i++) {
-				trails.get(i).addSnow(observedPark.getSnowChange());
-				setChanged();
-				notifyObservers(arg);
+			//Check if the Park is actually associated with this TrailList
+			if (observedPark.equals(this.park)) {
+				for (int i = 0; i < trails.size(); i++) {
+					trails.get(i).addSnow(observedPark.getSnowChange());
+					setChanged();
+					notifyObservers(arg);
+				}
 			}
 		}
 	}
+	
 }
