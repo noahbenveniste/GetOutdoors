@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.get_outdoors.enums.Difficulty;
 import edu.ncsu.csc216.get_outdoors.model.Activity;
-import edu.ncsu.csc216.get_outdoors.model.ActivityList;
 import edu.ncsu.csc216.get_outdoors.model.Park;
 import edu.ncsu.csc216.get_outdoors.model.ParkList;
 import edu.ncsu.csc216.get_outdoors.model.TrailList;
@@ -20,16 +19,22 @@ import edu.ncsu.csc216.get_outdoors.util.SortedArrayList;
  */
 public class GetOutdoorsManagerTest {
 
-	/** */
+	/** Manager object to be used throughout testing */
 	private GetOutdoorsManager manager;
-	
+	/** Name of valid file to be used */
 	private static final String VALID_FILE= "test-files/NCSU.md";
 	
+	/**
+	 * Sets up manager object for tests
+	 */
 	@Before
 	public void setUp() {
 		manager = new GetOutdoorsManager();
 	}
 	
+	/**
+	 * Tests openDataFile()
+	 */
 	@Test
 	public void testOpenDataFile() {
 		//Read in valid data file
@@ -58,6 +63,9 @@ public class GetOutdoorsManagerTest {
 		}
 	}
 	
+	/**
+	 * Tests setFilename()
+	 */
 	@Test
 	public void testSetFilename() {
 		try {
@@ -69,6 +77,9 @@ public class GetOutdoorsManagerTest {
 		assertEquals("file.md", manager.getFilename());
 	}
 	
+	/**
+	 * Tests getParks()
+	 */
 	@Test
 	public void testGetParks() {
 		manager.openDataFile(VALID_FILE);
@@ -80,6 +91,9 @@ public class GetOutdoorsManagerTest {
 		}
 	}
 	
+	/**
+	 * Tests saveDataFile()
+	 */
 	@Test
 	public void testSaveDataFile() {
 		//Read in valid data file
@@ -111,6 +125,9 @@ public class GetOutdoorsManagerTest {
 		//fail("Not yet implemented");
 	}
 	
+	/**
+	 * Tests addGetTrails()
+	 */
 	@Test
     public void testAddGetTrails() {
         setUp();
