@@ -125,6 +125,8 @@ public class FilterTab extends JPanel implements ActionListener {
     }
 
     /**
+     * Sets the ListPane
+     * 
      * @param listPane the listPane to set
      */
     protected void setListPane(FilterListPane listPane) {
