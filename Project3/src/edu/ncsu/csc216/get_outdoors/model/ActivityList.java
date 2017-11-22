@@ -54,9 +54,9 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	 * @return true if the Activity was added successfully, false otherwise i.e. the Activity was already on the list
 	 */
 	public boolean addActivity(String name, String description, boolean needSnow, int snowBoundary) {
-		String ID = "act-" + numActivities;
+		String id = "act-" + numActivities;
 		//Throws an exception if any of the inputs are invalid
-		Activity a = new Activity(ID, name, description, needSnow, snowBoundary);
+		Activity a = new Activity(id, name, description, needSnow, snowBoundary);
 		//Only increment the activity id counter if the activity is successfully added to the list
 		//i.e. it is not a duplicate of one in the list i.e. it doesn't have the same name as one 
 		//already in the list
