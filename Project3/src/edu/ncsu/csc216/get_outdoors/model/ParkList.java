@@ -27,6 +27,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	/**
 	 * Constructs a ParkList with a default name of "Parks". Initializes the numParks field
 	 * and constructs an empty SortedLinkedList of Park objects for the underlying list data structure.
+	 * Observers of ParkList are notified of construction.
 	 */
 	public ParkList() {
 		parkListName = "Parks";
@@ -46,12 +47,13 @@ public class ParkList extends Observable implements Observer, Tabular {
 	}
 	
 	/**
-	 * Adds a Park to the ParkList. Auto generates a unique ID.
+	 * Adds a Park to the ParkList if it is not already on the list. Auto generates a unique ID.
+	 * Observers of ParkList are notified of the change.
 	 * 
-	 * @param name
-	 * @param description
-	 * @param snowChange
-	 * @return
+	 * @param name the name of the Park
+	 * @param description the description for the Park
+	 * @param snowChange the amount of snow that fell/melted
+	 * @return true if the Park was added successfully, false otherwise i.e. it was already in the list
 	 */
 	public boolean addPark(String name, String description, double snowChange) {
 		String ID = "park-" + numParks;
@@ -90,6 +92,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 * 
 	 * @param index the index of the Park to find in the ParkList
 	 * @return the Park at the specified index
+	 * @throws IndexOutOfBoundsException if the specified index is not between 0 and size - 1
 	 */
 	public Park getParkAt(int index) {
 		if (index < 0 || index >= parks.size()) {
@@ -156,7 +159,10 @@ public class ParkList extends Observable implements Observer, Tabular {
 	}
 
 	/**
-	 * Notifies observers of ParkList when a Park is added
+	 * Notifies observers of ParkList when a change is made
+	 * 
+	 * @param o the observable object, in this case a Park
+	 * @param arg, the observer, in this case GetOutdoorsManager
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
