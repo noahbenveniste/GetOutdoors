@@ -126,7 +126,7 @@ public class ActivityEditPane extends EditPane {
     /**
      * Adds the given DocumentListener to the text fields.
      * 
-     * @param docListener DocumentListener to add to text fields
+     * @param l DocumentListener to add to text fields
      */
     @Override
     void addFieldListener(DocumentListener l) {

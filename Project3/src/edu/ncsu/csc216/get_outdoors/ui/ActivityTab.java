@@ -23,7 +23,7 @@ public class ActivityTab extends Tab {
     /**
      * Constructs the ActivityTab with the given ActivityList.
      * 
-     * @param ActivityList list of activities to display
+     * @param activities list of activities to display
      */
     public ActivityTab(ActivityList activities) {
         super();

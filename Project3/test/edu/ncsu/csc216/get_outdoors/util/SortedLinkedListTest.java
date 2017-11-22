@@ -303,7 +303,10 @@ public class SortedLinkedListTest {
 			assertEquals("[a, b, c]", list.toString());
 		}
 	}
-
+	
+	/**
+	 * Tests equals()
+	 */
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void testEquals() {
@@ -335,4 +338,5 @@ public class SortedLinkedListTest {
 			fail("Unexpected Exception thrown.");
 		}
 	}
+
 }

@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 /**
  * A linear data structure that uses an underlying array to store Comparable elements
- * in sorted order. SortedArrayList is capable of dynamically resizing itself if its
- * underlying array reaches capacity. Utilizes a binary search algorithm when searching
- * for elements to maximize runtime efficiency.
+ *   in sorted order. SortedArrayList is capable of dynamically resizing itself if its
+ *   underlying array reaches capacity. Utilizes a binary search algorithm when searching
+ *   for elements to maximize runtime efficiency.
  * 
  * @author Noah Benveniste
  * @param <E> indicates that the list can work with any Comparable object type
@@ -148,9 +148,9 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 
 	/**
 	 * Removes the element at the specified position in this list (optional
-	 * operation). Shifts any subsequent elements to the left (subtracts one from
-	 * their indices). Returns the element that was removed from the list.
-	 * This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
+	 *   operation). Shifts any subsequent elements to the left (subtracts one from
+	 *   their indices). Returns the element that was removed from the list.
+	 *   This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
 	 *
 	 * @param index the index of the element to be removed
 	 * @return the element previously at the specified position
@@ -205,7 +205,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 
 	/**
      * Returns the index of the first occurrence of the specified element in this
-     * list, or -1 if this list does not contain the element.
+     *   list, or -1 if this list does not contain the element.
      *
      * @param e element to search for
      * @return the index of the first occurrence of the specified element in this
@@ -237,7 +237,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		int max = size - 1;
 		
 		while (min <= max) {
-			int mid = (min + max)/2;
+			int mid = (min + max) / 2;
 			//If the currently indexed element in the list lexicographically precedes the element being compared
 			if (get(mid).compareTo(e) < 0) {
 				min = mid + 1;
@@ -260,6 +260,9 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	 */
 	@Override
 	public String toString() {
+		if (size() == 0) {
+			return "[]";
+		}
 		//Fence-post
 		String out = "[" + get(0).toString();
 		//Concatenate the string
