@@ -522,20 +522,29 @@ public class TrailListTest {
 	 * Tests equals()
 	 */
 	@Test
-	public void testEquals() {
+	public void testEqualsHashcode() {
+		setUp();
 		TrailList t1 = new TrailList(new Park("park-1", "Central Park", "Located in NYC"));
 		TrailList t2 = new TrailList(p);
 		
-		//Two trail lists with the same parkname
+		// Tests that TrailLists with identical Park names are considered equal.
 		assertTrue(t.equals(t2));
 		assertTrue(t2.equals(t));
 		
-		//Different parknames
+		
+		// Tests that TrailLists with different Park names are considered not equal.
 		assertFalse(t.equals(t1));
 		assertFalse(t1.equals(t));
 		
-		//null input
+		// Tests that passing null argument returns false.
 		assertFalse(t.equals(null));
+		
+		// Tests that identical TrailLists return identical hashcodes.
+		TrailList duplicate = new TrailList(p);
+		assertTrue(duplicate.hashCode() == t2.hashCode());
+		
+		// Tests that different Parks return different hashcodes.
+		assertFalse(t1.hashCode() == t2.hashCode());
 	}
 	
 }
