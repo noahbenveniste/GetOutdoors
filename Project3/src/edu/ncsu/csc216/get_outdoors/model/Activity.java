@@ -28,6 +28,8 @@ public class Activity extends Observable implements Comparable<Activity> {
         ensures that the update method is only called once during construction */
 	private boolean constructed;
 	
+	//THROWAWAY COMMENT
+	
 	/**
 	 * Constructs an Activity object given an identifier, a name, a description, a boolean
 	 *   indicating whether or not snow is needed for the Activity, and a snow boundary. 
