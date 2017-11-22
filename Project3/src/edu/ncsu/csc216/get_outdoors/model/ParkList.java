@@ -56,9 +56,9 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 * @return true if the Park was added successfully, false otherwise i.e. it was already in the list
 	 */
 	public boolean addPark(String name, String description, double snowChange) {
-		String ID = "park-" + numParks;
+		String id = "park-" + numParks;
 		//Throws an exception if any of the inputs are invalid
-		Park p = new Park(ID, name, description, snowChange);
+		Park p = new Park(id, name, description, snowChange);
 		//Only increment the park id counter if the park is successfully added to the list
 		//i.e. it is not a duplicate of one in the list i.e. it doesn't have the same name as one 
 		//already in the list
@@ -162,7 +162,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	 * Notifies observers of ParkList when a change is made
 	 * 
 	 * @param o the observable object, in this case a Park
-	 * @param arg, the observer, in this case GetOutdoorsManager
+	 * @param arg the observer, in this case GetOutdoorsManager
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
