@@ -1,6 +1,15 @@
 package edu.ncsu.csc216.get_outdoors.ui;
 
+/**
+ * Handles interaction between model and GUI for displaying Trail data
+ * 
+ * @author Noah Benveniste
+ * @author Daniel Mills
+ */
 public class TrailTableModel extends TableModel {
+
+    /** */
+	private static final long serialVersionUID = 1L;
 
 	public TrailTableModel(Object[][] data) {
 		super(data);
