@@ -86,9 +86,10 @@ public class ParkList extends Observable implements Observer, Tabular {
 	}
 	
 	/**
+	 * Gets a Park at a specified index
 	 * 
-	 * @param index
-	 * @return
+	 * @param index the index of the Park to find in the ParkList
+	 * @return the Park at the specified index
 	 */
 	public Park getParkAt(int index) {
 		if (index < 0 || index >= parks.size()) {
@@ -99,25 +100,29 @@ public class ParkList extends Observable implements Observer, Tabular {
 	}
 	
 	/**
+	 * Gets the number of Parks in the list
 	 * 
-	 * @return
+	 * @return the size of the ParkList
 	 */
 	public int size() {
 		return parks.size();
 	}
 	
 	/**
+	 * Checks if the ParkList is empty i.e. contains no Parks
 	 * 
-	 * @return
+	 * @return true if the ParkList contains no Parks, false otherwise
 	 */
 	public boolean isEmpty() {
 		return parks.isEmpty();
 	}
 	
 	/**
+	 * Finds the index of a Park by its ID
 	 * 
-	 * @param id
-	 * @return
+	 * @param id the ID of the Park
+	 * @return the index of the Park corresponding to the ID in the list, 
+	 *         -1 if the list doesn't contain a Park corresponding to the ID
 	 */
 	public int indexOfID(String id) {
 		int index = -1;
@@ -130,7 +135,12 @@ public class ParkList extends Observable implements Observer, Tabular {
 	}
 
 	/**
-	 * 
+	 * Generates a 2D array containing the data for each Park in the list.
+	 *   Each row in the array corresponds to an individual Park. The first
+	 *   column stores the ID, the second the name, the third the description
+	 *   and the fourth the snow change.
+	 *
+	 * @return a 2D object Array containing data for all Parks in the ParkList
 	 */
 	@Override
 	public Object[][] get2DArray() {
@@ -146,7 +156,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	}
 
 	/**
-	 * 
+	 * Notifies observers of ParkList when a Park is added
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
