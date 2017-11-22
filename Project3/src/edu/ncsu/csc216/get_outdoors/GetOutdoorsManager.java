@@ -585,6 +585,8 @@ public class GetOutdoorsManager extends Observable implements Observer {
 			for (int i = 0; i < parks.size(); i++) {
 				if (numLists == 0) {
 	                   addTrailList(parks.getParkAt(0));
+	                   setChanged();
+	           		   notifyObservers(arg);
 	                   return;
 	            }
 				String currentParkName = parks.getParkAt(i).getName();
