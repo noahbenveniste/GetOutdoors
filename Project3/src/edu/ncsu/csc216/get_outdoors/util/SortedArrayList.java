@@ -237,7 +237,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		int max = size - 1;
 		
 		while (min <= max) {
-			int mid = (min + max)/2;
+			int mid = (min + max) / 2;
 			//If the currently indexed element in the list lexicographically precedes the element being compared
 			if (get(mid).compareTo(e) < 0) {
 				min = mid + 1;

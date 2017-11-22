@@ -258,11 +258,7 @@ public class Activity extends Observable implements Comparable<Activity> {
 	public boolean equals(Object obj) {
 		if (obj instanceof Activity) {
 			Activity a = (Activity) obj;
-			if (this.name.equals(a.getName())) {
-				return true;
-			} else {
-				return false;
-			}
+			return this.name.equals(a.getName());
 		} else {
 			return false;
 		}

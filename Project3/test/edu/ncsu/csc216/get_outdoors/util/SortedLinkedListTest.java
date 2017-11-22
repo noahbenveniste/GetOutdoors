@@ -302,6 +302,9 @@ public class SortedLinkedListTest {
 		}
 	}
 	
+	/**
+	 * Tests equals()
+	 */
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void testEquals() {
