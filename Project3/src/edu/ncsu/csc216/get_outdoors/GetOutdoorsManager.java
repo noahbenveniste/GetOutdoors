@@ -25,13 +25,13 @@ public class GetOutdoorsManager extends Observable implements Observer {
 
     // States for file processing
     /** Start State */
-    private final State START_STATE = new StartState();
+    private final State startStateConstant = new StartState();
     /** State when processing activities */
-    private final State ACTIVITY_STATE = new ActivityState();
+    private final State activityStateConstant = new ActivityState();
     /** State when processing parks */
-    public final State PARK_STATE = new ParkState();
+    public State parkState = new ParkState();
     /** State when processing trails */
-    public final State TRAIL_STATE = new TrailState();
+    public final State trailStateConstant = new TrailState();
     /** Heading for activities in files */
     private static final String ACTIVITY_HEADER = "Activities";
     /** Heading for parks in files */
@@ -176,6 +176,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      *   array of TrailLists.
      * 
      * @param index the index from which to return a TrailList.
+     * @return returns the TrailList at the specified index.
      */
     public TrailList getTrailList(int index) {
     	if (index < 0 || index >= numLists) {
@@ -216,7 +217,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * This manager instance is added as an Observer of the added TrailList.
      * 
      * @param park 
-     * @return
+     * @return returns the index at which the new TrailList was added.
      */
     public int addTrailList(Park park) {
 
@@ -264,7 +265,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
             saveDataFile(this.filename);
         }
         try {
-            state = START_STATE;
+            state = startStateConstant;
             Scanner fileIn = new Scanner(new File(fname));
             while (fileIn.hasNextLine()) {
                 String line = fileIn.nextLine();
@@ -364,7 +365,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
         @Override
         public void onHeader(String line) {
             if (line.equalsIgnoreCase(ACTIVITY_HEADER)) {
-                state = ACTIVITY_STATE;
+                state = activityStateConstant;
             } else {
                 throw new IllegalArgumentException(
                         "File must start with the ACTIVITY information.");
@@ -407,7 +408,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
         @Override
         public void onHeader(String line) {
             if (line.equalsIgnoreCase(PARK_HEADER)) {
-                state = PARK_STATE;
+                state = parkState;
             } else {
                 throw new IllegalArgumentException(
                         "File must define PARK after the ACTIVITY information.");
@@ -461,7 +462,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
         @Override
         public void onHeader(String line) {
             if (line.equalsIgnoreCase(TRAIL_HEADER)) {
-                state = TRAIL_STATE;
+                state = trailStateConstant;
             } else {
                 throw new IllegalArgumentException(
                         "File must define TRAIL after the PARK information.");

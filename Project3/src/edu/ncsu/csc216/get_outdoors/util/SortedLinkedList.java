@@ -103,7 +103,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	/**
 	 * Removes and returns the element at the specified index in the list.
 	 * 
-	 * @param the index in the list to remove the element from.
+	 * @param index the index in the list to remove the element from.
      * @return the element at the specified index.
      * @throws IndexOutOfBoundsException if the index is out of range (index < 0 ||
      *             index >= size())
@@ -207,7 +207,6 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 *   an element E, and a reference to the next Node in the list, which may be null.
 	 *   
 	 * @author demills
-	 * @param <E> the element type stored in the list.
 	 */
 	public class Node {
 		
@@ -302,7 +301,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 		/**
 		 * Returns whether this Node or any of its successors contain the passed element.
 		 * 
-		 * @param the element to check for.
+		 * @param element the element to check for.
 		 * @return returns true if this Node or any successors contain the element; false otherwise.
 		 */
 		public boolean contains(E element) {
