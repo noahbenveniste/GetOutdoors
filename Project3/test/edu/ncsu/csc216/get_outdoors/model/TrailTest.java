@@ -29,9 +29,9 @@ public class TrailTest {
 	/** Generic Trail for use in testing. Initialized in setUp(). */
 	private static Trail trail;
 	/** An Activity that requires snow. Used for testing.  */
-	private static Activity SNOW_ACTIVITY; 
+	private static Activity snowActivity; 
 	/** An constant Activity that doesn't require snow. Used for testing.  */
-	private static Activity CLEAR_ACTIVITY;
+	private static Activity clearActivity;
 
 	/**
 	 * Sets up the class for testing.
@@ -41,10 +41,10 @@ public class TrailTest {
 	@Before
 	public void setUp() throws Exception {
 		activities = new SortedArrayList<Activity>();
-		SNOW_ACTIVITY = new Activity("act-1", "Snow Activity", "Needs Snow", true, 7);
-		CLEAR_ACTIVITY = new Activity("act-2", "Non-Snow Activity", "Needs Clear Day", false, 3);
-		activities.add(SNOW_ACTIVITY);
-		activities.add(CLEAR_ACTIVITY);
+		snowActivity = new Activity("act-1", "Snow Activity", "Needs Snow", true, 7);
+		clearActivity = new Activity("act-2", "Non-Snow Activity", "Needs Clear Day", false, 3);
+		activities.add(snowActivity);
+		activities.add(clearActivity);
 		trail = new Trail(ID, NAME, activities, false, SNOW, DISTANCE, DIFF);
 	}
 	/**
@@ -57,16 +57,16 @@ public class TrailTest {
 			setUp();
 			assertEquals(ID, trail.getTrailID());
 			assertEquals(NAME, trail.getTrailName());
-			assertEquals(CLEAR_ACTIVITY, trail.getActivities().get(0));
-			assertEquals(SNOW_ACTIVITY, trail.getActivities().get(1));
+			assertEquals(clearActivity, trail.getActivities().get(0));
+			assertEquals(snowActivity, trail.getActivities().get(1));
 			assertTrue(SNOW == trail.getSnow());
 			assertTrue(DISTANCE == trail.getDistance());
 			assertEquals(DIFF, trail.getDifficulty());
-			assertTrue(trail.allow(CLEAR_ACTIVITY));
-			assertTrue(trail.allow(SNOW_ACTIVITY));
+			assertTrue(trail.allow(clearActivity));
+			assertTrue(trail.allow(snowActivity));
 			assertFalse(trail.closedForMaintenance());
-			assertFalse(trail.trailOpen(CLEAR_ACTIVITY));
-			assertTrue(trail.trailOpen(SNOW_ACTIVITY));
+			assertFalse(trail.trailOpen(clearActivity));
+			assertTrue(trail.trailOpen(snowActivity));
 		} catch (Exception e) {
 			fail("Unexpected Exception thrown.");
 		}
@@ -194,8 +194,8 @@ public class TrailTest {
 		// Tests setActivities through constructor.
 		try {
 			setUp();
-			assertEquals(SNOW_ACTIVITY, trail.getActivities().get(1));
-			assertEquals(CLEAR_ACTIVITY, trail.getActivities().get(0));
+			assertEquals(snowActivity, trail.getActivities().get(1));
+			assertEquals(clearActivity, trail.getActivities().get(0));
 		} catch (Exception e) {
 			fail("Unexpected Exception thrown from setUp().");
 		}
@@ -205,8 +205,8 @@ public class TrailTest {
 			trail.setActivities(null);
 			fail("Expected IAE to be thrown.");
 		} catch (IllegalArgumentException e) {
-			assertEquals(SNOW_ACTIVITY, trail.getActivities().get(1));
-			assertEquals(CLEAR_ACTIVITY, trail.getActivities().get(0));
+			assertEquals(snowActivity, trail.getActivities().get(1));
+			assertEquals(clearActivity, trail.getActivities().get(0));
 		}
 	}
 
@@ -273,43 +273,43 @@ public class TrailTest {
 			setUp();
 
 			// Trail.snow = 10, 
-			// SNOW_ACTIVITY.snowBoundary = 7
-			// CLEAR_ACTIVITY.snowBoundary = 3
-			assertTrue(trail.trailOpen(SNOW_ACTIVITY));
-			assertFalse(trail.trailOpen(CLEAR_ACTIVITY));
+			// snowActivity.snowBoundary = 7
+			// clearActivity.snowBoundary = 3
+			assertTrue(trail.trailOpen(snowActivity));
+			assertFalse(trail.trailOpen(clearActivity));
 			
 			// trailOpen() should return false for all trails under maintenance.
 			trail.setTrailMaintenance(true);
-			assertFalse(trail.trailOpen(SNOW_ACTIVITY));
-			assertFalse(trail.trailOpen(CLEAR_ACTIVITY));
+			assertFalse(trail.trailOpen(snowActivity));
+			assertFalse(trail.trailOpen(clearActivity));
 			
 			trail.setTrailMaintenance(false);
-			assertTrue(trail.trailOpen(SNOW_ACTIVITY));
-			assertFalse(trail.trailOpen(CLEAR_ACTIVITY));
+			assertTrue(trail.trailOpen(snowActivity));
+			assertFalse(trail.trailOpen(clearActivity));
 
 			// Negating each Activity's needSnow boolen value.
 			// trailOpen() should now return the opposite of before.
-			CLEAR_ACTIVITY.setNeedSnow(true);
-			SNOW_ACTIVITY.setNeedSnow(false);
-			assertFalse(trail.trailOpen(SNOW_ACTIVITY));
-			assertTrue(trail.trailOpen(CLEAR_ACTIVITY));
+			clearActivity.setNeedSnow(true);
+			snowActivity.setNeedSnow(false);
+			assertFalse(trail.trailOpen(snowActivity));
+			assertTrue(trail.trailOpen(clearActivity));
 			
 			// Setting back to default for next test. Values are:
 			// Trail.snow = 10, 
-			// SNOW_ACTIVITY.snowBoundary = 7
-			// CLEAR_ACTIVITY.snowBoundary = 3
+			// snowActivity.snowBoundary = 7
+			// clearActivity.snowBoundary = 3
 			setUp();
 			
 			// Setting values on other side of each Activity's snowBoundary.
 			// trailOpen() should return the opposite of before.
-			SNOW_ACTIVITY.setSnowBoundary(15);
-			CLEAR_ACTIVITY.setSnowBoundary(20);
+			snowActivity.setSnowBoundary(15);
+			clearActivity.setSnowBoundary(20);
 
 			// Trail.snow = 10, 
-			// SNOW_ACTIVITY.snowBoundary = 15
-			// CLEAR_ACTIVITY.snowBoundary = 20
-			assertFalse(trail.trailOpen(SNOW_ACTIVITY));
-			assertTrue(trail.trailOpen(CLEAR_ACTIVITY));
+			// snowActivity.snowBoundary = 15
+			// clearActivity.snowBoundary = 20
+			assertFalse(trail.trailOpen(snowActivity));
+			assertTrue(trail.trailOpen(clearActivity));
 		} catch (Exception e) {
 			fail("Unexpected Exception thrown.");
 		}
