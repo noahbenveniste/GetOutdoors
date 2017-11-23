@@ -130,7 +130,7 @@ public class ParkList extends Observable implements Observer, Tabular {
 	public int indexOfID(String id) {
 		int index = -1;
 		for (int i = 0; i < parks.size(); i++) {
-			if ((parks.get(i).getParkID()).equals(id)) {
+			if (parks.get(i).getParkID().equals(id)) {
 				index = i;
 			}
 		}

@@ -220,7 +220,7 @@ public class Activity extends Observable implements Comparable<Activity> {
 	@Override
 	public int compareTo(Activity o) {
 		//Delegate to String's compareTo()
-		return (this.getName().compareTo(o.getName()));
+		return this.getName().compareTo(o.getName());
 	}
 	
 	/**

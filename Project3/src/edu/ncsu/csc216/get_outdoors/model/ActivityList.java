@@ -148,7 +148,7 @@ public class ActivityList extends Observable implements Observer, Tabular {
 	public int indexOfID(String id) {
 		int index = -1;
 		for (int i = 0; i < activities.size(); i++) {
-			if ((activities.get(i).getActivityID()).equals(id)) {
+			if (activities.get(i).getActivityID().equals(id)) {
 				index = i;
 			}
 		}

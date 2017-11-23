@@ -357,7 +357,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	public int indexOfID(String trailID) {
 		int index = -1;
 		for (int i = 0; i < trails.size(); i++) {
-			if ((trails.get(i).getTrailID()).equals(trailID)) {
+			if (trails.get(i).getTrailID().equals(trailID)) {
 				index = i;
 			}
 		}
