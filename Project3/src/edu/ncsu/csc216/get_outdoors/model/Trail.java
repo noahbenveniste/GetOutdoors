@@ -369,7 +369,7 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 */
 	@Override
 	public String toString() {
-		String activitiesString = activities.get(0).toString();
+		String activitiesString = activities.get(0).getName();
 		for (int i = 1; i < activities.size(); i++) {
 			activitiesString += "\t" + activities.get(i).getName();
 		}

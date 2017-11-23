@@ -339,7 +339,7 @@ public class TrailTest {
 			fail("Unexpected Exception thrown.");
 		}
 		String expectedTrailString = NAME + "\t" + "false" + "\t" + SNOW + "\t" + DISTANCE + "\t" +
-				                     DIFF + "\t" + trail.getActivities().get(0).toString() + "\t" +
+				                     DIFF + "\t" + trail.getActivities().get(0).getName() + "\t" +
 				                     trail.getActivities().get(1).getName();
 
 		assertEquals(expectedTrailString, trail.toString());
