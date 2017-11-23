@@ -35,10 +35,15 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	/**
 	 * Constructs an empty SortedArrayList. The specific type must implement the Comparable interface.
 	 * This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
+	 * 
 	 * @param capacity the capacity of the underlying array
+	 * @throws IllegalArgumentException if the capacity is negative
 	 */
 	@SuppressWarnings("unchecked")
 	public SortedArrayList(int capacity) {
+		if (capacity < 0) {
+			throw new IllegalArgumentException("Invalid capacity");
+		}
 		Comparable<E>[] o = new Comparable[capacity];
 		this.size = 0;
 		this.list = (E[]) o;
