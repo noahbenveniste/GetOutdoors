@@ -199,6 +199,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 *   equal if it is a TrailList with identically named Parks.
 	 * 
 	 * @return returns true if the parameter equals this TraiList, false otherwise.
+	 * @param object the Object to compare for equality to this one.
 	 */
 	public boolean equals(Object object) {
 		if (object == null || !(object instanceof TrailList)) {
@@ -265,12 +266,9 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 * @return returns a 2D array representing the Trails in the list that 
 	 *         allow the specified Activity.
 	 * @throws IllegalArgumentException if the parameter is null.
+	 * @param activity the Activity by which to filter the TrailList. 
 	 */
 	public Object[][] get2DArray(Activity activity) {
-		// This may not be needed, but Trail.trailOpen() allows for 
-		// null activities, so a NullPointerException will be thrown
-		// if this is removed without updating Trail.trailOpen().
-		// TODO - Determine the correct behavior for this.
 		if (activity == null) {
 			throw new IllegalArgumentException("Activity cannot be null");
 		}
@@ -400,5 +398,4 @@ public class TrailList extends Observable implements Observer, Tabular {
 			}
 		}
 	}
-	
 }
