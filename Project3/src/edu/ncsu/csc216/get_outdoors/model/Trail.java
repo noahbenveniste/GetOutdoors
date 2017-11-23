@@ -369,12 +369,12 @@ public class Trail extends Observable implements Comparable<Trail> {
 	 */
 	@Override
 	public String toString() {
-		if (activities.isEmpty()) {
-			return "";
-		}
-		String activitiesString = activities.get(0).getName();
-		for (int i = 1; i < activities.size(); i++) {
-			activitiesString += "\t" + activities.get(i).getName();
+		String activitiesString = "";
+		if (!activities.isEmpty()) {
+			activitiesString = activities.get(0).getName();
+			for (int i = 1; i < activities.size(); i++) {
+				activitiesString += "\t" + activities.get(i).getName();
+			}
 		}
 		return getTrailName() + "\t" + closedForMaintenance() + "\t" + getSnow() + "\t" + 
 		       getDistance() + "\t" + getDifficulty().toString() + "\t" + activitiesString;
