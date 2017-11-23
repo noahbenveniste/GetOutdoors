@@ -17,7 +17,7 @@ public class TrailEditPane extends EditPane {
 	 * Constructs a new TrailEditPane.
 	 */
 	public TrailEditPane() {
-
+		// Empty for now.
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class TrailEditPane extends EditPane {
 	 */
 	@Override
 	protected void initView() {
-
+		// Empty for now.
 	}
 
 	/**
@@ -35,6 +35,7 @@ public class TrailEditPane extends EditPane {
 	 */
 	@Override
 	void setData(Data d) {
+		// Empty for now.
 	}
 
 	/**
@@ -44,7 +45,7 @@ public class TrailEditPane extends EditPane {
 	 */
 	@Override
 	void enableEdit(Data d) {
-
+		// Empty for now.
 	}
 
 	/**
@@ -52,7 +53,7 @@ public class TrailEditPane extends EditPane {
      */
 	@Override
 	void clearFields() {
-
+		// Empty for now.
 	}
 
     /**
@@ -62,7 +63,7 @@ public class TrailEditPane extends EditPane {
      */
 	@Override
 	void addFieldListener(DocumentListener docListener) {
-
+		// Empty for now.
 	}
 
 
@@ -71,7 +72,7 @@ public class TrailEditPane extends EditPane {
      */
 	@Override
 	void fillFields() {
-
+		// Empty for now.
 	}
 
     /**
