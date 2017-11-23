@@ -340,7 +340,7 @@ public class TrailTest {
 		}
 		String expectedTrailString = NAME + "\t" + "false" + "\t" + SNOW + "\t" + DISTANCE + "\t" +
 				                     DIFF + "\t" + trail.getActivities().get(0).toString() + "\t" +
-				                     trail.getActivities().get(1).toString();
+				                     trail.getActivities().get(1).getName();
 
 		assertEquals(expectedTrailString, trail.toString());
 	}
