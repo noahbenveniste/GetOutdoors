@@ -21,14 +21,14 @@ public class Activity extends Observable implements Comparable<Activity> {
 	private String description;
 	/** Whether or not snow is needed for the Activity */
 	private boolean needSnow;
-	/** The minimum amount of snow required for the Activity if needSnow is true,
-	    or the maximum allowable amount of snow if needSnow is false */
+	/** 
+	 * The minimum amount of snow required for the Activity if needSnow is true, 
+	 * or the maximum allowable amount of snow if needSnow is false 
+	 */
 	private int snowBoundary;
 	/** A flag used to check if the object was constructed; 
         ensures that the update method is only called once during construction */
 	private boolean constructed;
-	
-	//THROWAWAY COMMENT
 	
 	/**
 	 * Constructs an Activity object given an identifier, a name, a description, a boolean
