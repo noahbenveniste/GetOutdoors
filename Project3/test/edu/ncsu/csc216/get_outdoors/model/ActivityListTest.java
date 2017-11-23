@@ -143,6 +143,7 @@ public class ActivityListTest {
 				activityList.addActivity(ACTIVITY_NAME, DESC, true, SNOW_BOUNDARY);
 				fail("Should have thrown IlleglArgumentException.");
 			} catch (IllegalArgumentException e) {
+				assertEquals(2, activityList.size());
 			}
 		} catch (Exception e) {
 			fail("Unexpected Exception in setUp().");

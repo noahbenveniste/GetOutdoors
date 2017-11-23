@@ -539,7 +539,7 @@ public class TrailListTest {
 		assertFalse(t1.equals(t));
 		
 		// Tests that passing null argument returns false.
-		assertFalse(t.equals(null));
+		assertFalse(t == null);
 		
 		// Tests that identical TrailLists return identical hashcodes.
 		TrailList duplicate = new TrailList(p);

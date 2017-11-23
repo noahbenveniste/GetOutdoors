@@ -16,7 +16,7 @@ public class TrailListPane extends ListPane {
 	 * Constructs a new TrailListPane().
 	 */
 	public TrailListPane() {
-		
+		// Empty for now.
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class TrailListPane extends ListPane {
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
-		
+		// Empty for now.
 	}
 
 	/**

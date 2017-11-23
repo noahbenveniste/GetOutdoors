@@ -87,7 +87,7 @@ public class GetOutdoorsManagerTest {
 		exp.addPark("Main Campus", "Lovely park on Main Campus", 0.0);
 		exp.addPark("Centennial Campus", "Park contained on Engineering Campus", 1.0);
 		for (int i = 0; i < exp.size(); i++) {
-			assertEquals(0, (exp.getParkAt(i)).compareTo(manager.getParks().getParkAt(i)));
+			assertEquals(0, exp.getParkAt(i).compareTo(manager.getParks().getParkAt(i)));
 		}
 	}
 	

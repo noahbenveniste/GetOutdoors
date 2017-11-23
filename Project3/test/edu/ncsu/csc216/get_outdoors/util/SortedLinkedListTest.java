@@ -313,8 +313,8 @@ public class SortedLinkedListTest {
 		try {
 			setUp();
 			
-			// Tests the passing null element returns false.
-			assertFalse(list.equals(null));
+			// Tests that passing a null element returns false.
+			assertEquals(false, list.equals(null));
 
 			// Tests that passing non-SortedLinkedList type returns false.
 			assertFalse(list.equals("Not a SortedLinkedList."));
