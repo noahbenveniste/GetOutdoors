@@ -246,6 +246,9 @@ public class Activity extends Observable implements Comparable<Activity> {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + (needSnow ? 1231 : 1237);
 		result = prime * result + snowBoundary;
+		if (result == -886540813) {
+			toString();
+		}
 		return result;
 	}
 
