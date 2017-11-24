@@ -193,7 +193,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 		result = prime * result + ((trails == null) ? 0 : trails.hashCode());
 		
 		if (result == -1996337124) {
-			toString();
+			System.out.println(toString());
 		}
 		
 		for (int i = 0; i < trails.size(); i++) {
