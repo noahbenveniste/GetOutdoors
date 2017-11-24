@@ -188,6 +188,18 @@ public class TrailList extends Observable implements Observer, Tabular {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((park == null) ? 0 : park.getName().hashCode());
+		if (result == -1996337124) {
+		for (int i = 0; i < trails.size(); i++) {
+			Trail current = trails.get(i);
+			System.out.print("[TrailID: " + current.getTrailID());
+			System.out.print(", TrailName: " + current.getTrailName());
+			System.out.print(", Closed: " + current.closedForMaintenance()); 
+			System.out.print(", Snow: " + current.getSnow());
+			System.out.print(", Distance: " + current.getDistance());
+			System.out.print(", Difficulty : " + current.getDifficulty());
+			System.out.println(", Activities : " + current.getActivities() + "]");
+		}
+		}
 
 		return result;
 	}
@@ -200,6 +212,16 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 * @param object the Object to compare for equality to this one.
 	 */
 	public boolean equals(Object object) {
+		for (int i = 0; i < trails.size(); i++) {
+			Trail current = trails.get(i);
+			System.out.print("[TrailID: " + current.getTrailID());
+			System.out.print(", TrailName: " + current.getTrailName());
+			System.out.print(", Closed: " + current.closedForMaintenance()); 
+			System.out.print(", Snow: " + current.getSnow());
+			System.out.print(", Distance: " + current.getDistance());
+			System.out.print(", Difficulty : " + current.getDifficulty());
+			System.out.println(", Activities : " + current.getActivities() + "]");
+		}
 		if (object == null || !(object instanceof TrailList)) {
 			return false;
 		}
