@@ -244,7 +244,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
     	setChanged();
     	notifyObservers(this);
 
-    	return numLists;
+    	return numLists - 1;
     }
     
     /**
