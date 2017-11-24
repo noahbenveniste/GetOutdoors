@@ -49,14 +49,14 @@ public class GetOutdoorsManagerTest {
 		manager = null;
 		manager = new GetOutdoorsManager();
 		try {
-			manager.openDataFile("test-files/invalid.md");
+			manager.openDataFile("test-files/Invalid.md");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("File must start with the ACTIVITY information.", e.getMessage());
 		}
 		
 		try {
-			manager.openDataFile("test-files/invalid.md");
+			manager.openDataFile("test-files/Invalid.md");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("File must start with the ACTIVITY information.", e.getMessage());
