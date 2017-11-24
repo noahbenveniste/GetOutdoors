@@ -47,7 +47,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		Comparable<E>[] o = new Comparable[capacity];
 		size = 0;
 		list = (E[]) o;
-		capacity = list.length;
+		this.capacity = list.length;
 	}
 	
 	/**
