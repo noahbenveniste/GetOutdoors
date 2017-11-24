@@ -204,7 +204,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 			System.out.print(", Snow: " + current.getSnow());
 			System.out.print(", Distance: " + current.getDistance());
 			System.out.print(", Difficulty : " + current.getDifficulty());
-			System.out.println(", Activities : " + current.getTrailID() + "]");
+			System.out.println(", Activities : " + current.getActivities() + "]");
 		}
 
 		return result;
