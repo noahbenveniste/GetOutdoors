@@ -92,7 +92,7 @@ public abstract class EditPane extends JPanel {
     /**
      * Adds the given DocumentListener to the text fields.
      * 
-     * @param docListener DocumentListener to add to text fields
+     * @param l DocumentListener to add to text fields
      */
     abstract void addFieldListener(DocumentListener l);
 
@@ -103,6 +103,8 @@ public abstract class EditPane extends JPanel {
 
     /**
      * Checks that certain fields are not empty
+     * 
+     * @return true if the fields aren't empty
      */
     abstract boolean fieldsNotEmpty();
 

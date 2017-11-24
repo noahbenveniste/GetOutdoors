@@ -18,11 +18,11 @@ public class ParkEditPane extends EditPane {
 
     /** Serial version UID */
     private static final long serialVersionUID = 4001387904803487644L;
-    /** */
+    /** Data */
     private ParkData data;
-    /** */
+    /** Various text fields used throughout */
     private JTextField txtParkID, txtParkName, txtSnowChange;
-    /** */
+    /** Text input area */
     private JTextArea txtParkDescription;
 
     /**
@@ -170,7 +170,7 @@ public class ParkEditPane extends EditPane {
     /**
      * Adds the given DocumentListener to the text fields.
      * 
-     * @param docListener DocumentListener to add to text fields
+     * @param l DocumentListener to add to text fields
      */
     @Override
     void addFieldListener(DocumentListener l) {

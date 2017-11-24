@@ -25,13 +25,13 @@ public class GetOutdoorsManager extends Observable implements Observer {
 
     // States for file processing
     /** Start State */
-    private final State START_STATE = new StartState();
+    private final State startStateConstant = new StartState();
     /** State when processing activities */
-    private final State ACTIVITY_STATE = new ActivityState();
+    private final State activityStateConstant = new ActivityState();
     /** State when processing parks */
-    public final State PARK_STATE = new ParkState();
+    public State parkState = new ParkState();
     /** State when processing trails */
-    public final State TRAIL_STATE = new TrailState();
+    public final State trailStateConstant = new TrailState();
     /** Heading for activities in files */
     private static final String ACTIVITY_HEADER = "Activities";
     /** Heading for parks in files */
@@ -176,6 +176,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      *   array of TrailLists.
      * 
      * @param index the index from which to return a TrailList.
+     * @return returns the TrailList at the specified index.
      */
     public TrailList getTrailList(int index) {
     	if (index < 0 || index >= numLists) {
@@ -216,10 +217,9 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * This manager instance is added as an Observer of the added TrailList.
      * 
      * @param park 
-     * @return
+     * @return returns the index at which the new TrailList was added.
      */
     public int addTrailList(Park park) {
-
     	TrailList newList;
     	// Returns -1 if TrailList cannot be created.
     	try {
@@ -233,9 +233,17 @@ public class GetOutdoorsManager extends Observable implements Observer {
     		growTrailListArray();
     	}
 
-    	newList.addObserver(this);
+    	// Adds new TrailList to "trailLists" array. 
     	trailLists[numLists] = newList; 
     	numLists++;
+
+    	// Adds this manager as an Observer of the new list.
+    	newList.addObserver(this);
+
+    	// Notifies observers.
+    	setChanged();
+    	notifyObservers(this);
+
     	return numLists - 1;
     }
     
@@ -262,7 +270,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
             saveDataFile(this.filename);
         }
         try {
-            state = START_STATE;
+            state = startStateConstant;
             Scanner fileIn = new Scanner(new File(fname));
             while (fileIn.hasNextLine()) {
                 String line = fileIn.nextLine();
@@ -362,7 +370,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
         @Override
         public void onHeader(String line) {
             if (line.equalsIgnoreCase(ACTIVITY_HEADER)) {
-                state = ACTIVITY_STATE;
+                state = activityStateConstant;
             } else {
                 throw new IllegalArgumentException(
                         "File must start with the ACTIVITY information.");
@@ -405,7 +413,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
         @Override
         public void onHeader(String line) {
             if (line.equalsIgnoreCase(PARK_HEADER)) {
-                state = PARK_STATE;
+                state = parkState;
             } else {
                 throw new IllegalArgumentException(
                         "File must define PARK after the ACTIVITY information.");
@@ -459,7 +467,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
         @Override
         public void onHeader(String line) {
             if (line.equalsIgnoreCase(TRAIL_HEADER)) {
-                state = TRAIL_STATE;
+                state = trailStateConstant;
             } else {
                 throw new IllegalArgumentException(
                         "File must define TRAIL after the PARK information.");
@@ -578,15 +586,24 @@ public class GetOutdoorsManager extends Observable implements Observer {
      */
 	@Override
 	public void update(Observable obs, Object arg) {
-		if (parks.equals(obs)) { // Updated ParkList case
+		if (obs instanceof ParkList && parks.equals((ParkList) obs)) { // Updated ParkList case
 			// The updated "parks" ParkList is iterated through to see if any 
 			// new Parks have been added. If one has, it will not have an associated
 			// TrailList in "trailLists", so the new Park is passed to addTrailList().
 			for (int i = 0; i < parks.size(); i++) {
 				if (numLists == 0) {
 	                   addTrailList(parks.getParkAt(0));
+	                   changed = true;
+	                   setChanged();
+	           		   notifyObservers(arg);
 	                   return;
 	            }
+				
+				// Checks that each Park in "parks" has a TrailList in "trailLists"
+				// with a matching name. If a Park has an associated TrailList  
+				// in "trailLists", "noTrailList" is set to false, so a duplicate 
+				// TrailList will not be created for a Park. If it doesn't, addTrailLists()
+				// is called, passing the new Park as its argument.
 				String currentParkName = parks.getParkAt(i).getName();
 				boolean noTrailList = true;
 				for (int j = 0; j < numLists; j++) {
@@ -596,12 +613,16 @@ public class GetOutdoorsManager extends Observable implements Observer {
 				        noTrailList = false;
 				    }
 				}
+
 				//If no trail list was found for the current park
 				if (noTrailList) {
 					addTrailList(parks.getParkAt(i));
 				}
-			} // for
-		} // if
-		notifyObservers(this);
+			} 
+		} 
+		// Notifies the GUI of the change(s).
+		changed = true;
+		setChanged();
+		notifyObservers(arg);
 	}
 }

@@ -44,6 +44,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Gets the ListPane
+     * 
      * @return the listPane
      */
     protected ListPane getListPane() {
@@ -51,6 +53,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Sets the ListPane
+     * 
      * @param listPane the listPane to set
      */
     protected void setListPane(ListPane listPane) {
@@ -58,6 +62,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Gets the EditPane
+     * 
      * @return the editPane
      */
     protected EditPane getEditPane() {
@@ -65,6 +71,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Sets the EditPane
+     * 
      * @param editPane the editPane to set
      */
     protected void setEditPane(EditPane editPane) {
@@ -72,6 +80,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Gets the EditButtonPanel
+     * 
      * @return the editButtonPanel
      */
     protected EditButtonPanel getEditButtonPanel() {
@@ -79,6 +89,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Sets the EditButtonPanel
+     * 
      * @param editButtonPanel the editButtonPanel to set
      */
     protected void setEditButtonPanel(EditButtonPanel editButtonPanel) {
@@ -86,6 +98,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Gets the AddMode
+     * 
      * @return the addMode
      */
     protected boolean isAddMode() {
@@ -93,6 +107,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Sets the AddMode
+     * 
      * @param addMode the addMode to set
      */
     protected void setAddMode(boolean addMode) {
@@ -100,6 +116,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Gets the EditMode
+     * 
      * @return the editMode
      */
     protected boolean isEditMode() {
@@ -107,6 +125,8 @@ public abstract class Tab extends JPanel
     }
 
     /**
+     * Sets the EditMode
+     * 
      * @param editMode the editMode to set
      */
     protected void setEditMode(boolean editMode) {

@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 /**
  * A linear data structure that uses an underlying array to store Comparable elements
- * in sorted order. SortedArrayList is capable of dynamically resizing itself if its
- * underlying array reaches capacity. Utilizes a binary search algorithm when searching
- * for elements to maximize runtime efficiency.
+ *   in sorted order. SortedArrayList is capable of dynamically resizing itself if its
+ *   underlying array reaches capacity. Utilizes a binary search algorithm when searching
+ *   for elements to maximize runtime efficiency.
  * 
  * @author Noah Benveniste
  * @param <E> indicates that the list can work with any Comparable object type
@@ -35,13 +35,18 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	/**
 	 * Constructs an empty SortedArrayList. The specific type must implement the Comparable interface.
 	 * This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
+	 * 
 	 * @param capacity the capacity of the underlying array
+	 * @throws IllegalArgumentException if the capacity is negative
 	 */
 	@SuppressWarnings("unchecked")
 	public SortedArrayList(int capacity) {
+		if (capacity < 0) {
+			throw new IllegalArgumentException("Invalid capacity");
+		}
 		Comparable<E>[] o = new Comparable[capacity];
-		this.size = 0;
-		this.list = (E[]) o;
+		size = 0;
+		list = (E[]) o;
 		this.capacity = list.length;
 	}
 	
@@ -52,17 +57,17 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	@SuppressWarnings("unchecked")
 	private void resize() {
 		// Update capacity
-		this.capacity += RESIZE;
+		capacity += RESIZE;
 		// Create a new object array with the new, larger capacity
-		Comparable<E>[] o = new Comparable[this.capacity];
+		Comparable<E>[] o = new Comparable[capacity];
 		// Cast to generic type
 		E[] temp = (E[]) o;
 		// Assign the elements from the old array to the same index in the new array
-		for (int i = 0; i < this.size(); i++) {
-			temp[i] = this.list[i];
+		for (int i = 0; i < size(); i++) {
+			temp[i] = list[i];
 		}
 		// Assign the new array to the list field
-		this.list = temp;
+		list = temp;
 	}
 
 	/**
@@ -72,7 +77,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
      */
 	@Override
 	public int size() {
-		return this.size;
+		return size;
 	}
 
 	/**
@@ -82,7 +87,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
      */
 	@Override
 	public boolean isEmpty() {
-		return this.size == 0;
+		return size == 0;
 	}
 
 	/**
@@ -102,15 +107,15 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		}
 		
 		//Check for repeat elements
-		for (int i = 0; i < this.size(); i++) {
-			if (this.list[i].equals(e)) {
+		for (int i = 0; i < size(); i++) {
+			if (list[i].equals(e)) {
 				throw new IllegalArgumentException("Cannot add duplicate elements.");
 			}
 		}
 		
 		//Check if the list has reached capacity
-		if (this.size() == this.capacity) { // Grow the array if list is full
-			this.resize();
+		if (size() == capacity) { // Grow the array if list is full
+			resize();
 		}
 		
 		//Adding to an empty list
@@ -118,7 +123,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 			list[size] = e;
 			size++;
 			return true;
-		} else if (list[this.size - 1].compareTo(e) < 0) { //Case where the element is appended to the end of the list i.e. the element being 
+		} else if (list[size - 1].compareTo(e) < 0) { //Case where the element is appended to the end of the list i.e. the element being 
 			list[size] = e; 							   //added is lexicographically less than the last element in the list
 			size++; 
 			return true;
@@ -126,7 +131,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		
 		//Find the index where the element needs to go
 		int index = 0;
-		for (int i = 0; i < this.size; i++) {
+		for (int i = 0; i < size; i++) {
 			//If the currently indexed element in the list is lexicographically less than the element being added,
 			//the list should be right shifted and the element put at the current index.
 			if (list[i].compareTo(e) >= 0) {
@@ -136,21 +141,21 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		}
 		
 		//Right shift the array to insert the element at the necessary index
-		for (int i = this.size; i > index; i--) {
+		for (int i = size; i > index; i--) {
 			list[i] = list[i - 1];
 		}
 		// Add the element to the desired index
 		list[index] = e;
 		// Increment the size of the ArrayList
-		this.size++;
+		size++;
 		return true;
 	}
 
 	/**
 	 * Removes the element at the specified position in this list (optional
-	 * operation). Shifts any subsequent elements to the left (subtracts one from
-	 * their indices). Returns the element that was removed from the list.
-	 * This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
+	 *   operation). Shifts any subsequent elements to the left (subtracts one from
+	 *   their indices). Returns the element that was removed from the list.
+	 *   This code is reused from https://github.ncsu.edu/engr-csc216-fall2017/csc216-221-LL-8.git
 	 *
 	 * @param index the index of the element to be removed
 	 * @return the element previously at the specified position
@@ -159,18 +164,18 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	 */
 	@Override
 	public E remove(int index) {
-		if (index < 0 || index >= this.size()) {
+		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException("Index is outside the accepatble range");
 		}
 		// Get the element at the specified index
 		E temp = list[index];
-		for (int i = index; i < this.size() - 1; i++) {
+		for (int i = index; i < size() - 1; i++) {
 			list[i] = list[i + 1];
 		}
 		// Set the repeated element at the end of the list to null
-		list[this.size() - 1] = null;
+		list[size() - 1] = null;
 		// Decrement the size
-		this.size--;
+		size--;
 		// Return the removed element
 		return temp;
 	}
@@ -185,7 +190,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
      */
 	@Override
 	public E get(int index) {
-		if (index < 0 || index >= this.size()) {
+		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException("Index is outside the accepatble range");
 		} else {
 			return list[index];
@@ -205,7 +210,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 
 	/**
      * Returns the index of the first occurrence of the specified element in this
-     * list, or -1 if this list does not contain the element.
+     *   list, or -1 if this list does not contain the element.
      *
      * @param e element to search for
      * @return the index of the first occurrence of the specified element in this
@@ -237,7 +242,7 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		int max = size - 1;
 		
 		while (min <= max) {
-			int mid = (min + max)/2;
+			int mid = (min + max) / 2;
 			//If the currently indexed element in the list lexicographically precedes the element being compared
 			if (get(mid).compareTo(e) < 0) {
 				min = mid + 1;
@@ -260,6 +265,9 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	 */
 	@Override
 	public String toString() {
+		if (size() == 0) {
+			return "[]";
+		}
 		//Fence-post
 		String out = "[" + get(0).toString();
 		//Concatenate the string
@@ -279,7 +287,6 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + capacity;
 		result = prime * result + Arrays.hashCode(list);
 		result = prime * result + size;
 		return result;
@@ -301,8 +308,6 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		if (getClass() != obj.getClass())
 			return false;
 		SortedArrayList<E> other = (SortedArrayList<E>) obj;
-		if (capacity != other.capacity)
-			return false;
 		if (!Arrays.equals(list, other.list))
 			return false;
 		if (size != other.size)

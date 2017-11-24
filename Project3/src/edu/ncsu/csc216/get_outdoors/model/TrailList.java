@@ -187,10 +187,8 @@ public class TrailList extends Observable implements Observer, Tabular {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numTrails;
 		result = prime * result + ((park == null) ? 0 : park.hashCode());
-		result = prime * result + ((trailListID == null) ? 0 : trailListID.hashCode());
-		result = prime * result + ((trails == null) ? 0 : trails.hashCode());
+
 		return result;
 	}
 
@@ -199,6 +197,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 *   equal if it is a TrailList with identically named Parks.
 	 * 
 	 * @return returns true if the parameter equals this TraiList, false otherwise.
+	 * @param object the Object to compare for equality to this one.
 	 */
 	public boolean equals(Object object) {
 		if (object == null || !(object instanceof TrailList)) {
@@ -206,9 +205,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 		}
 
 		TrailList otherTrailList = (TrailList) object;
-		String otherParkName = otherTrailList.getParkName();
-
-		if (otherParkName.equals(park.getName())) {
+		if (otherTrailList.hashCode() == this.hashCode()) {
 			return true;
 		}
 
@@ -265,12 +262,9 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 * @return returns a 2D array representing the Trails in the list that 
 	 *         allow the specified Activity.
 	 * @throws IllegalArgumentException if the parameter is null.
+	 * @param activity the Activity by which to filter the TrailList. 
 	 */
 	public Object[][] get2DArray(Activity activity) {
-		// This may not be needed, but Trail.trailOpen() allows for 
-		// null activities, so a NullPointerException will be thrown
-		// if this is removed without updating Trail.trailOpen().
-		// TODO - Determine the correct behavior for this.
 		if (activity == null) {
 			throw new IllegalArgumentException("Activity cannot be null");
 		}
@@ -359,7 +353,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	public int indexOfID(String trailID) {
 		int index = -1;
 		for (int i = 0; i < trails.size(); i++) {
-			if ((trails.get(i).getTrailID()).equals(trailID)) {
+			if (trails.get(i).getTrailID().equals(trailID)) {
 				index = i;
 			}
 		}
@@ -390,10 +384,13 @@ public class TrailList extends Observable implements Observer, Tabular {
 		}
 		if (obs instanceof Park) {
 			Park observedPark = (Park) obs;
-			for (int i = 0; i < trails.size(); i++) {
-				trails.get(i).addSnow(observedPark.getSnowChange());
-				setChanged();
-				notifyObservers(arg);
+			//Check if the Park is actually associated with this TrailList
+			if (observedPark.equals(this.park)) {
+				for (int i = 0; i < trails.size(); i++) {
+					trails.get(i).addSnow(observedPark.getSnowChange());
+					setChanged();
+					notifyObservers(arg);
+				}
 			}
 		}
 	}

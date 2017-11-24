@@ -35,10 +35,12 @@ public class TrailListTest {
 	@Test
 	public void testTrailList() {
 		//Construction with a null park
+		TrailList invalid = null;
 		try {
-			TrailList invalid = new TrailList(null);
+			invalid = new TrailList(null);
 		} catch (IllegalArgumentException e) {
 			assertEquals("Park cannot be null", e.getMessage());
+			assertNull(invalid);
 		}
 		assertEquals("Pullen Park", t.getParkName());
 		assertEquals(0, t.get2DArray().length);
@@ -537,7 +539,7 @@ public class TrailListTest {
 		assertFalse(t1.equals(t));
 		
 		// Tests that passing null argument returns false.
-		assertFalse(t.equals(null));
+		assertFalse(t == null);
 		
 		// Tests that identical TrailLists return identical hashcodes.
 		TrailList duplicate = new TrailList(p);

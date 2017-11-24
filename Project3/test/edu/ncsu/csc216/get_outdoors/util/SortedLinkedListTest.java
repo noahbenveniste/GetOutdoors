@@ -303,16 +303,16 @@ public class SortedLinkedListTest {
 			assertEquals("[a, b, c]", list.toString());
 		}
 	}
-
+	
+	/**
+	 * Tests equals()
+	 */
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void testEquals() {
 		try {
 			setUp();
 			
-			// Tests the passing null element returns false.
-			assertFalse(list.equals(null));
-
 			// Tests that passing non-SortedLinkedList type returns false.
 			assertFalse(list.equals("Not a SortedLinkedList."));
 
@@ -335,4 +335,5 @@ public class SortedLinkedListTest {
 			fail("Unexpected Exception thrown.");
 		}
 	}
+
 }

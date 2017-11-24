@@ -55,8 +55,9 @@ package edu.ncsu.csc216.get_outdoors.util;
  * @see AbstractList
  * @see AbstractSequentialList
  * @since 1.2
+ * 
+ * @param <E> indicates that this list works with any object type
  */
-
 public interface SortedList<E extends Comparable<E>> {
 
     // Query Operations

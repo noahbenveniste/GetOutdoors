@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.get_outdoors.enums.Difficulty;
 import edu.ncsu.csc216.get_outdoors.model.Activity;
-import edu.ncsu.csc216.get_outdoors.model.ActivityList;
 import edu.ncsu.csc216.get_outdoors.model.Park;
 import edu.ncsu.csc216.get_outdoors.model.ParkList;
 import edu.ncsu.csc216.get_outdoors.model.TrailList;
@@ -20,16 +19,22 @@ import edu.ncsu.csc216.get_outdoors.util.SortedArrayList;
  */
 public class GetOutdoorsManagerTest {
 
-	/** */
+	/** Manager object to be used throughout testing */
 	private GetOutdoorsManager manager;
+	/** Name of valid file to be used */
+	private static final String VALID_FILE = "test-files/NCSU.md";
 	
-	private static final String VALID_FILE= "test-files/NCSU.md";
-	
+	/**
+	 * Sets up manager object for tests
+	 */
 	@Before
 	public void setUp() {
 		manager = new GetOutdoorsManager();
 	}
 	
+	/**
+	 * Tests openDataFile()
+	 */
 	@Test
 	public void testOpenDataFile() {
 		//Read in valid data file
@@ -44,20 +49,23 @@ public class GetOutdoorsManagerTest {
 		manager = null;
 		manager = new GetOutdoorsManager();
 		try {
-			manager.openDataFile("test-files/invalid.md");
+			manager.openDataFile("test-files/Invalid.md");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("File must start with the ACTIVITY information.", e.getMessage());
 		}
 		
 		try {
-			manager.openDataFile("test-files/invalid.md");
+			manager.openDataFile("test-files/Invalid.md");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("File must start with the ACTIVITY information.", e.getMessage());
 		}
 	}
 	
+	/**
+	 * Tests setFilename()
+	 */
 	@Test
 	public void testSetFilename() {
 		try {
@@ -69,6 +77,9 @@ public class GetOutdoorsManagerTest {
 		assertEquals("file.md", manager.getFilename());
 	}
 	
+	/**
+	 * Tests getParks()
+	 */
 	@Test
 	public void testGetParks() {
 		manager.openDataFile(VALID_FILE);
@@ -76,10 +87,13 @@ public class GetOutdoorsManagerTest {
 		exp.addPark("Main Campus", "Lovely park on Main Campus", 0.0);
 		exp.addPark("Centennial Campus", "Park contained on Engineering Campus", 1.0);
 		for (int i = 0; i < exp.size(); i++) {
-			assertEquals(0, (exp.getParkAt(i)).compareTo(manager.getParks().getParkAt(i)));
+			assertEquals(0, exp.getParkAt(i).compareTo(manager.getParks().getParkAt(i)));
 		}
 	}
 	
+	/**
+	 * Tests saveDataFile()
+	 */
 	@Test
 	public void testSaveDataFile() {
 		//Read in valid data file
@@ -96,21 +110,24 @@ public class GetOutdoorsManagerTest {
 		a.add(manager.getActivities().getActivityAt(0));
 		manager.getTrailList(2).addTrail("Main trail", a, true, 0.0, 1.0, Difficulty.MODERATE);
 		//Save the current manager contents to a data file
-		manager.saveDataFile("test-files/expected.md");
+		manager.saveDataFile("test-files/Actual_TempExportedManager.md");
 		
 		//Test that the exported file can be read back in
 		manager = null;
 		manager = new GetOutdoorsManager();
-		manager.openDataFile("test-files/expected.md");
+		manager.openDataFile("test-files/Actual_TempExportedManager.md");
 		assertEquals(4, manager.getActivities().size());
 		assertEquals(3, manager.getParks().size());
 		assertEquals(3, manager.getNumTrailLists());
 		Activity exp = new Activity("act-2", "Run", "Running", false, 5);
 		assertEquals(exp, manager.getTrailList(0).getTrailAt(0).getActivities().get(0));
-		manager.saveDataFile("test-files/expected2.md");
+		manager.saveDataFile("test-files/Actual_FinalExportedManager.md");
 		//fail("Not yet implemented");
 	}
 	
+	/**
+	 * Tests addGetTrails()
+	 */
 	@Test
     public void testAddGetTrails() {
         setUp();
