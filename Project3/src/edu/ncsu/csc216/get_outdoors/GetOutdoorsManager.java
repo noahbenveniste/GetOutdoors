@@ -220,7 +220,6 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * @return returns the index at which the new TrailList was added.
      */
     public int addTrailList(Park park) {
-
     	TrailList newList;
     	// Returns -1 if TrailList cannot be created.
     	try {
@@ -234,12 +233,18 @@ public class GetOutdoorsManager extends Observable implements Observer {
     		growTrailListArray();
     	}
 
-    	newList.addObserver(this);
-    	setChanged();
-    	notifyObservers(this);
+    	// Adds new TrailList to "trailLists" array. 
     	trailLists[numLists] = newList; 
     	numLists++;
-    	return numLists - 1;
+
+    	// Adds this manager as an Observer of the new list.
+    	newList.addObserver(this);
+
+    	// Notifies observers.
+    	setChanged();
+    	notifyObservers(this);
+
+    	return numLists;
     }
     
     /**
