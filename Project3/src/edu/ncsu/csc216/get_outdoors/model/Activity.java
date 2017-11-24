@@ -66,18 +66,18 @@ public class Activity extends Observable implements Comparable<Activity> {
 	 * Sets the ID for the Activity and trims any excess leading or trailing whitespace.
 	 * Observers of Activity are notified of this change if this method is called subsequently to construction.
 	 * 
-	 * @param id the ID to set
+	 * @param activityID the ID to set
 	 * @throws IllegalArgumentException if the ID is null, an empty string, or all whitespace.
 	 */
-	private void setActivityID(String id) {
-		if (id == null) {
+	private void setActivityID(String activityID) {
+		if (activityID == null) {
 			throw new IllegalArgumentException("Activity ID cannot be null");
 		} else {
-			id = id.trim();
-			if (id.equals("")) {
+			activityID = activityID.trim();
+			if (activityID.equals("")) {
 				throw new IllegalArgumentException("ID is either an empty string or only contains whitespace");
 			} else {
-				this.activityID = id;
+				this.activityID = activityID;
 			}
 		}
 	}
@@ -106,18 +106,18 @@ public class Activity extends Observable implements Comparable<Activity> {
 	 * Sets the description of the Activity and trims any excess leading or trailing whitespace.
 	 * Observers of Activity are notified of this change if this method is called subsequently to construction.
 	 * 
-	 * @param d the description to set for the Activity.
+	 * @param description the description to set for the Activity.
 	 * @throws IllegalArgumentException if the description is null, an empty string, or contains only whitespace.
 	 */
-	public void setDescription(String d) {
-		if (d == null) {
+	public void setDescription(String description) {
+		if (description == null) {
 			throw new IllegalArgumentException("Activity description cannot be null");
 		} else {
-			d = d.trim();
-			if (d.equals("")) {
+			description = description.trim();
+			if (description.equals("")) {
 				throw new IllegalArgumentException("Description is either an empty string or only contains whitespace");
 			} else {
-				this.description = d;
+				this.description = description;
 			}
 		}
 		if (constructed) {
@@ -132,10 +132,10 @@ public class Activity extends Observable implements Comparable<Activity> {
 	 *   is false, snow boundary is the maximum allowable amount of snow for the Activity.
 	 * Observers of Activity are notified of this change if this method is called subsequently to construction.
 	 * 
-	 * @param b true if snow is required for the Activity, false otherwise.
+	 * @param needSnow true if snow is required for the Activity, false otherwise.
 	 */
-	public void setNeedSnow(boolean b) {
-		this.needSnow = b;
+	public void setNeedSnow(boolean needSnow) {
+		this.needSnow = needSnow;
 		if (constructed) {
 			setChanged(); //Marks the Observable as changed
 			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
@@ -147,14 +147,14 @@ public class Activity extends Observable implements Comparable<Activity> {
 	 *   of snow necessary. If snow is not required, this is the maximum amount of snow allowable.
 	 * Observers of Activity are notified of this change if this method is called subsequently to construction.
 	 * 
-	 * @param s the snow boundary value to set.
+	 * @param snowBoundary the snow boundary value to set.
 	 * @throws IllegalArgumentException if the snow boundary to set is negative
 	 */
-	public void setSnowBoundary(int s) {
-		if (s < 0) {
+	public void setSnowBoundary(int snowBoundary) {
+		if (snowBoundary < 0) {
 			throw new IllegalArgumentException("Activity snow boundary cannot be negative");
 		} else {
-			this.snowBoundary = s;
+			this.snowBoundary = snowBoundary;
 		}
 		if (constructed) {
 			setChanged(); //Marks the Observable as changed
@@ -220,7 +220,7 @@ public class Activity extends Observable implements Comparable<Activity> {
 	@Override
 	public int compareTo(Activity o) {
 		//Delegate to String's compareTo()
-		return this.getName().compareTo(o.getName());
+		return name.compareTo(o.getName());
 	}
 	
 	/**
@@ -259,10 +259,9 @@ public class Activity extends Observable implements Comparable<Activity> {
 	public boolean equals(Object obj) {
 		if (obj instanceof Activity) {
 			Activity a = (Activity) obj;
-			return this.name.equals(a.getName());
+			return name.equals(a.getName());
 		} else {
 			return false;
 		}
 	}
-	
 }
