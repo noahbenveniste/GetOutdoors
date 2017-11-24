@@ -241,11 +241,13 @@ public class Activity extends Observable implements Comparable<Activity> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		/*
 		result = prime * result + ((activityID == null) ? 0 : activityID.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + (needSnow ? 1231 : 1237);
 		result = prime * result + snowBoundary;
+		*/
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		if (result == -886540813) {
 			System.out.println(toString());
 		}
