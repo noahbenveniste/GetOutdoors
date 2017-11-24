@@ -5,9 +5,9 @@ import java.util.Observable;
 /**
  * A Park in the GetOutdoors system represents a collection of trails for a
  *   single park in the system. This is modelled by having each TrailList 
- *   maintain the Park at which the Trails are located. Each Park maintains 
+ *   maintain the Park at which the Trails are located. Each Park also maintains 
  *   the change in snow depth, in inches, from the most recent snowfall of melt.
- * Park is an Observable type, and notifies its oberservers on construction 
+ * Park is an Observable type, and notifies its observers on construction 
  *   and when a new snowfall or melt is recorded via setSnowChange().
  *   
  * @author demills
