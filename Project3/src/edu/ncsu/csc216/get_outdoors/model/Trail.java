@@ -332,9 +332,6 @@ public class Trail extends Observable implements Comparable<Trail> {
 		int result = 1;
 		result = prime * result + ((trailName == null) ? 0 : trailName.hashCode());
 
-		if (result == 1144560476) {
-			System.out.println(toString());
-		}
 		return result;
 	}
 

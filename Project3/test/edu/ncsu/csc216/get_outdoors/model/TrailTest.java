@@ -350,11 +350,11 @@ public class TrailTest {
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void testEqualsAndHashcode() {
-		// These two should equal each other, but not hash to the same value.
+		// These two should equal each other and hash to the same value.
 		Trail trailA1 = new Trail(ID + "abc", "AAA", activities, false, SNOW, DISTANCE, DIFF);
 		Trail trailA2 = new Trail(ID, "AAA", activities, true, SNOW, DISTANCE, DIFF);
 		assertEquals(trailA1, trailA2);
-		assertFalse(trailA1.hashCode() == trailA2.hashCode());
+		assertTrue(trailA1.hashCode() == trailA2.hashCode());
 
 		// This should not be equal to trailA1 or trailA2, due to case-sensitivity.
 		Trail trailA3 = new Trail(ID, "aaa", activities, false, SNOW, DISTANCE, DIFF);
