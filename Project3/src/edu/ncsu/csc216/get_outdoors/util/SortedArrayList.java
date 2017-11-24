@@ -287,7 +287,6 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + capacity;
 		result = prime * result + Arrays.hashCode(list);
 		result = prime * result + size;
 		return result;
@@ -309,8 +308,6 @@ public class SortedArrayList<E extends Comparable<E>> implements SortedList<E> {
 		if (getClass() != obj.getClass())
 			return false;
 		SortedArrayList<E> other = (SortedArrayList<E>) obj;
-		if (capacity != other.capacity)
-			return false;
 		if (!Arrays.equals(list, other.list))
 			return false;
 		if (size != other.size)
