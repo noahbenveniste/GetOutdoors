@@ -203,13 +203,12 @@ public class TrailList extends Observable implements Observer, Tabular {
 		if (object == null || !(object instanceof TrailList)) {
 			return false;
 		}
-		if (object.equals(this)) {
+
+		if (object == this) {
 			return true;
 		}
 
 		TrailList otherTrailList = (TrailList) object;
-		String otherParkName = otherTrailList.getParkName();
-
 		if (otherTrailList.hashCode() == this.hashCode()) {
 			return true;
 		}
