@@ -204,10 +204,6 @@ public class TrailList extends Observable implements Observer, Tabular {
 			return false;
 		}
 
-		if (object == this) {
-			return true;
-		}
-
 		TrailList otherTrailList = (TrailList) object;
 		if (otherTrailList.hashCode() == this.hashCode()) {
 			return true;
