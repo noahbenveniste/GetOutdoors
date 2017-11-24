@@ -210,10 +210,6 @@ public class TrailList extends Observable implements Observer, Tabular {
 			return true;
 		}
 
-		if (otherParkName.equals(park.getName())) {
-			return true;
-		}
-
 		return false;
 	}
 
