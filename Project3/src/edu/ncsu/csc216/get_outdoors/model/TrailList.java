@@ -187,7 +187,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((park == null) ? 0 : park.hashCode());
+		result = prime * result + ((park == null) ? 0 : park.getName().hashCode());
 
 		return result;
 	}
