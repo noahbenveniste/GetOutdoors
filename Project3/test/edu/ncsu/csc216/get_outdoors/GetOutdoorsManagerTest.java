@@ -110,18 +110,18 @@ public class GetOutdoorsManagerTest {
 		a.add(manager.getActivities().getActivityAt(0));
 		manager.getTrailList(2).addTrail("Main trail", a, true, 0.0, 1.0, Difficulty.MODERATE);
 		//Save the current manager contents to a data file
-		manager.saveDataFile("test-files/expected.md");
+		manager.saveDataFile("test-files/Actual_TempExportedManager.md");
 		
 		//Test that the exported file can be read back in
 		manager = null;
 		manager = new GetOutdoorsManager();
-		manager.openDataFile("test-files/expected.md");
+		manager.openDataFile("test-files/Actual_TempExportedManager.md");
 		assertEquals(4, manager.getActivities().size());
 		assertEquals(3, manager.getParks().size());
 		assertEquals(3, manager.getNumTrailLists());
 		Activity exp = new Activity("act-2", "Run", "Running", false, 5);
 		assertEquals(exp, manager.getTrailList(0).getTrailAt(0).getActivities().get(0));
-		manager.saveDataFile("test-files/expected2.md");
+		manager.saveDataFile("test-files/Actual_FinalExportedManager.md");
 		//fail("Not yet implemented");
 	}
 	
