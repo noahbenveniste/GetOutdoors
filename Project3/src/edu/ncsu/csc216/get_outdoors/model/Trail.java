@@ -330,17 +330,6 @@ public class Trail extends Observable implements Comparable<Trail> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		/*
-		result = prime * result + ((activities == null) ? 0 : activities.hashCode());
-		result = prime * result + (closedForMaintenance ? 1231 : 1237);
-		result = prime * result + ((difficulty == null) ? 0 : difficulty.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(distance);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(snow);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((trailID == null) ? 0 : trailID.hashCode());
-		*/
 		result = prime * result + ((trailName == null) ? 0 : trailName.hashCode());
 
 		if (result == 1144560476) {
