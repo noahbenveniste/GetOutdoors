@@ -193,9 +193,6 @@ public class TrailList extends Observable implements Observer, Tabular {
 		result = prime * result + ((trails == null) ? 0 : trails.hashCode());
 		
 		if (result == -1996337124) {
-			System.out.println(toString());
-		}
-		
 		for (int i = 0; i < trails.size(); i++) {
 			Trail current = trails.get(i);
 			System.out.print("[TrailID: " + current.getTrailID());
@@ -205,6 +202,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 			System.out.print(", Distance: " + current.getDistance());
 			System.out.print(", Difficulty : " + current.getDifficulty());
 			System.out.println(", Activities : " + current.getActivities() + "]");
+		}
 		}
 
 		return result;
