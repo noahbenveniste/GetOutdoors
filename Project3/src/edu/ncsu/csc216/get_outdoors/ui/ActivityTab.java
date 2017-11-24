@@ -30,25 +30,25 @@ public class ActivityTab extends Tab {
         this.activities = activities;
 
         // Create the ActivityListPane (table)
-        this.setListPane(new ActivityListPane(this.activities));
+        setListPane(new ActivityListPane(this.activities));
         // Add a ListSelectionListener to the listPane so that ActivityTab
         // can respond to selection events.
-        this.getListPane().getTable().getSelectionModel().addListSelectionListener(this);
+        getListPane().getTable().getSelectionModel().addListSelectionListener(this);
 
         // Creates the ActivityPane (form)
-        this.setEditPane(new ActivityEditPane());
+        setEditPane(new ActivityEditPane());
         // Adds a FieldListener to the editPane so that ActivityTab can
         // respond
         // to events in fields that are part of the ActivityPane.
-        this.getEditPane().addFieldListener(this);
+        getEditPane().addFieldListener(this);
 
         // Sets the layout for the tab and adds the element.
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(this.getListPane());
+        add(getListPane());
         add(Box.createRigidArea(new Dimension(0, 5)));
-        add(this.getEditPane());
+        add(getEditPane());
         add(Box.createRigidArea(new Dimension(0, 5)));
-        add(this.getButtons());
+        add(getButtons());
     }
 
     /**
