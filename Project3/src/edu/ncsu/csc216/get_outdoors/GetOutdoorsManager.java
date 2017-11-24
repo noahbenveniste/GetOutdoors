@@ -598,6 +598,12 @@ public class GetOutdoorsManager extends Observable implements Observer {
 	           		   notifyObservers(arg);
 	                   return;
 	            }
+				
+				// Checks that each Park in "parks" has a TrailList in "trailLists"
+				// with a matching name. If a Park has an associated TrailList  
+				// in "trailLists", "noTrailList" is set to false, so a duplicate 
+				// TrailList will not be created for a Park. If it doesn't, addTrailLists()
+				// is called, passing the new Park as its argument.
 				String currentParkName = parks.getParkAt(i).getName();
 				boolean noTrailList = true;
 				for (int j = 0; j < numLists; j++) {
@@ -607,15 +613,16 @@ public class GetOutdoorsManager extends Observable implements Observer {
 				        noTrailList = false;
 				    }
 				}
+
 				//If no trail list was found for the current park
 				if (noTrailList) {
 					addTrailList(parks.getParkAt(i));
 				}
-			} // for
-		} // if
+			} 
+		} 
+		// Notifies the GUI of the change(s).
 		changed = true;
 		setChanged();
 		notifyObservers(arg);
 	}
-	
 }
