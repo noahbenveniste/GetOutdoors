@@ -37,7 +37,7 @@ public class TrailListTab extends Tab {
 		// Add a ListSelectionListener to the listPane so that ParkTab
         // can respond to selection events.
         this.getListPane().getTable().getSelectionModel().addListSelectionListener(this);
-        this.setEditPane(new TrailEditPane());
+        this.setEditPane(new TrailEditPane(activities));
         // Adds a FieldListener to the editPane so that ParkTab can
         // respond
         // to events in fields that are part of the ParkPane.
