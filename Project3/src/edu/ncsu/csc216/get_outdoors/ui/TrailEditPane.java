@@ -124,6 +124,7 @@ public class TrailEditPane extends EditPane implements Observer {
 		if (tcActivities == null) {
 			tcActivities = new JCheckBox[activityList.size()];
 			for (int i = 0; i < activityList.size(); i++) {
+				tcActivities[i] = new JCheckBox();
 				tcActivities[i].setHorizontalAlignment(SwingConstants.LEFT);
 				tcActivities[i].setText(activityList.getActivityAt(i).getName());
 				tcActivities[i].setVisible(true); 
