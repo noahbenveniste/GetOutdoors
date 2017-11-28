@@ -2,6 +2,7 @@ package edu.ncsu.csc216.get_outdoors.ui;
 
 import java.awt.FlowLayout;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -21,7 +22,7 @@ import edu.ncsu.csc216.get_outdoors.model.Activity;
  * 
  * @author demills
  */
-public class TrailEditPane extends EditPane {
+public class TrailEditPane extends EditPane implements Observer {
 
 	/** Constant used for serialization. */
 	private static final long serialVersionUID = 1L;
@@ -62,6 +63,8 @@ public class TrailEditPane extends EditPane {
 	public TrailEditPane(TrailData data, ActivityList actList) {
 		super();
 		this.data = data;
+		this.activityList = actList;
+		this.activityList.addObserver(this);
 		init();
 		disableEdit();
 	}
@@ -310,6 +313,11 @@ public class TrailEditPane extends EditPane {
 		return activities;
 	}
 	public void update(Observable obs, Object obj) {
-		// TODO determine if this method is needed.
+		if (obs instanceof ActivityList) {
+			tcActivities = null;
+			this.removeAll();
+			init();
+		}
 	}
+	
 }

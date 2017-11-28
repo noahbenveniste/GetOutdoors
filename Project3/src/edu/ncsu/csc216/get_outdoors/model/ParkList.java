@@ -67,12 +67,12 @@ public class ParkList extends Observable implements Observer, Tabular {
 			//Increment the number of parks
 			numParks++;
 			
+			//Add this object to the created activity as an observer
+			p.addObserver(this);
+			
 			//Marks the Observable as changed
 			setChanged(); 
 			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
-			
-			//Add this object to the created activity as an observer
-			p.addObserver(this);
 			
 			//Return true if the Park was successfully added
 			return true;
