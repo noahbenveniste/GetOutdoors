@@ -314,6 +314,11 @@ public class TrailEditPane extends EditPane implements Observer {
 		return activities;
 	}
 	public void update(Observable obs, Object obj) {
-		// TODO determine if this method is needed.
+		if (obs instanceof ActivityList) {
+			tcActivities = null;
+			this.removeAll();
+			init();
+		}
 	}
+	
 }
