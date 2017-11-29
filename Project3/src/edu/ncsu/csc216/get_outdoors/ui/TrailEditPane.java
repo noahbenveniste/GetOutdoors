@@ -195,6 +195,7 @@ public class TrailEditPane extends EditPane implements Observer {
 	@Override
 	void setData(Data data) {
 		this.data = (TrailData) data;
+		fillFields();
 	}
 
 	/**
