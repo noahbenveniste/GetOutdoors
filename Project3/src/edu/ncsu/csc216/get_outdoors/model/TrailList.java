@@ -136,7 +136,6 @@ public class TrailList extends Observable implements Observer, Tabular {
 		} 
 
 		Trail removedTrail = trails.remove(index);
-		numTrails--;
 		setChanged();
 		notifyObservers(this);
 		return removedTrail;
