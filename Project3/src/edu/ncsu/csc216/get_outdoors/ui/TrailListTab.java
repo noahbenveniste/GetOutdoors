@@ -58,7 +58,11 @@ public class TrailListTab extends Tab {
 	public void delete() {
 		TrailData d = (TrailData) getEditPane().getFields();
 		if (d != null) {
+			//Nulls the data for the removed trail in the TrailTableModel GUI component
+			//getListPane().getTableModel().setData(null, trails.indexOfID(d.getTrailID()));
+			//Remove the trail from the trail list
 			this.trails.removeTrail(d.getTrailID());
+			System.out.println("Trails in TrailTableModel.data: " + getListPane().getTableModel().data.length);
 			getEditPane().clearFields();
 		    if (addMode) {
 		        enableAdd(false);
