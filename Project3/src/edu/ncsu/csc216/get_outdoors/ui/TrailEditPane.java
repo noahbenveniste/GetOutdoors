@@ -260,6 +260,7 @@ public class TrailEditPane extends EditPane implements Observer {
             txtSnow.setText(data.getSnow() + "");
             txtDistance.setText(data.getDistance() + "");
             txtClosedForMaintenance.setSelected(data.isClosedForMaintenance());
+            tcDifficulty.setSelectedItem(data.getDifficulty());
             for (int i = 0; i < activityList.size(); i++) {
             	Activity currActivity = activityList.getActivityAt(i);
             	if (data.getActivities().contains(currActivity)) {
