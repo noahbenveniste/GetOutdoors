@@ -76,7 +76,7 @@ public class TrailEditPane extends EditPane implements Observer {
 	JTextField getTxtTrailID() {
         if (null == txtTrailID) {
             txtTrailID = new JTextField();
-            txtTrailID.setColumns(5);
+            txtTrailID.setColumns(10);
             txtTrailID.setEditable(false);
             txtTrailID.setVisible(true);
             txtTrailID.setHorizontalAlignment(SwingConstants.LEFT);
@@ -86,7 +86,7 @@ public class TrailEditPane extends EditPane implements Observer {
 	JTextField getTxtTrailName() {
         if (null == txtTrailName) {
             txtTrailName = new JTextField();
-            txtTrailName.setColumns(5);
+            txtTrailName.setColumns(20);
             txtTrailName.setEditable(false);
             txtTrailName.setVisible(true);
             txtTrailName.setHorizontalAlignment(SwingConstants.LEFT);
