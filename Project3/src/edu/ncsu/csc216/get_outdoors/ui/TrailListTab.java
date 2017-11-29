@@ -57,17 +57,19 @@ public class TrailListTab extends Tab {
 	@Override
 	public void delete() {
 		TrailData d = (TrailData) getEditPane().getFields();
-		this.trails.removeTrail(d.getTrailID());
-		getEditPane().clearFields();
-        if (addMode) {
-            enableAdd(false);
-            getEditPane().disableAdd();
-        }
-        if (editMode) {
-            getListPane().clearSelection();
-            enableSave(false);
-            getEditPane().disableEdit();
-        }
+		if (d != null) {
+			this.trails.removeTrail(d.getTrailID());
+			getEditPane().clearFields();
+		    if (addMode) {
+		        enableAdd(false);
+		        getEditPane().disableAdd();
+		    }
+		    if (editMode) {
+		        getListPane().clearSelection();
+		        enableSave(false);
+		        getEditPane().disableEdit();
+		    }
+		}
 	}
 
 	/**

@@ -388,10 +388,11 @@ public class TrailList extends Observable implements Observer, Tabular {
 			if (observedPark.equals(this.park)) {
 				for (int i = 0; i < trails.size(); i++) {
 					trails.get(i).addSnow(observedPark.getSnowChange());
-					setChanged();
-					notifyObservers(arg);
 				}
+				setChanged();
+				notifyObservers(arg);
 			}
 		}
 	}
+	
 }
