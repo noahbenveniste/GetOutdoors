@@ -11,8 +11,8 @@
 
 # Trails
 
-*	Main Campus	Trail	false	0.0	0.5	EASY	Bike	Run
-*	Main Campus	Red Brick Road	true	.0	1.5	MODERATE	Run
+*	Main Campus	Trail	false	abcd	0.5		Bike	Run
+*	Main Campus	Red Brick Road	true	abcd	1.5	MODERATE	Run
 *	Centennial Campus	Trail	fals0.75	EASY	Run
-*	Centennial Campus	Trail	true	0.0	2.5	EASY	Run
-*	Centennial Campus	Oval Hill	false	0.0	1.0	CHALLENGING	Bike	Ski
+*	Centennial Campus	Trail	true	asdfdafs 2.5	EASY	Run
+*	Centennial Campus	Oval Hill	false	0.0	1.0	Bike	Ski
