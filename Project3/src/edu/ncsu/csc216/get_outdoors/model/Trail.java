@@ -209,19 +209,6 @@ public class Trail extends Observable implements Comparable<Trail> {
 	}
 	
 	/**
-	 * Sets the Trail's "difficulty" instance variable to the passed Difficulty.
-	 * 
-	 * @param diff the Difficulty value to set for this Trail.
-	 */
-	public void setDifficulty(Difficulty difficulty) {
-		this.difficulty = difficulty;
-		if (constructed) {
-			setChanged(); //Marks the Observable as changed
-			notifyObservers(this); //Sends a message to any Observer classes that the object has changed.
-		}
-	}
-	
-	/**
 	 * Gets the Trail's identifier.
 	 * 
 	 * @return the Trail ID

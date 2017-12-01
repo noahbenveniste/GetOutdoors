@@ -121,7 +121,6 @@ public class TrailListTab extends Tab {
                     trail.setTrailMaintenance(d.isClosedForMaintenance());
                     trail.setActivities(d.getActivities());
                     trail.setDistance(d.getDistance());
-                    trail.setDifficulty(d.getDifficulty());
                     getListPane().clearSelection();
                     enableSave(false);
                     getEditPane().disableEdit();
@@ -146,5 +145,4 @@ public class TrailListTab extends Tab {
             }
         }
 	}
-
 }
