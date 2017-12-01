@@ -1,0 +1,48 @@
+1. Test that Invalid File Types don't load succesfully.
+	- can test all files in a single test.
+2. Test Updating of a Trail's Snow Depth from updating a Park's snowfall.
+	- include a negative snowfall (melt) larger than snow depth and ensure 
+		the depth is set to 0.
+
+4. Test snow boundary of "needSnow = true " activities on, below, and above 
+		the boundary. 
+	- Can be tested in 3 ways: 
+		 1. Changing an Activity's snowBoundary.
+		 2. Changing a Park's latest snowfall.
+		 3. Directly changing a Trail's snow depth.
+		 4. Toggling snowBoundary to the opposite value.
+
+5. Test snow boundary of "needSnow = false" activities on, below, and above 
+		the boundary. Test this by changing 
+	- Can be tested in 3 ways: 
+		 1. Changing an Activity's snowBoundary.
+		 2. Changing a Park's latest snowfall.
+		 3. Directly changing a Trail's snow depth.
+		 4. Toggling snowBoundary to the opposite value.
+
+5. Test loading and saving valid files.
+
+6. Test adding and removing trails.
+
+7. Activity
+	- Change description and save.
+	- Adding new Activities.
+	- Cancelling.
+
+8. Park 
+	- Adding a new Park(s).
+	- Changing a Park's description.
+	- Updating snowchange.
+	- Cancelling.
+
+9. Single Trail Adding
+	- Adding a new Trail. 
+	- Check that invalid values (empty text box or all whitespace) don't add
+		new trails to a Park (TrailList underneath). 
+	- Cancelling.
+
+10. Adding/Removing Trails 
+	- Adding/removing at front, middle, and back (according to naming order)
+
+11. Filtering Trails, w/ different activities, closed for maintenance status,
+		and/or snow depths above or below snow boundaries.

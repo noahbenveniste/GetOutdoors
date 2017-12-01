@@ -287,9 +287,12 @@ public abstract class Tab extends JPanel
         if (e.getValueIsAdjusting()) {
             return;
         }
+        //System.out.println("valueChanged() called");
         int row = listPane.getTable().getSelectedRow();
+        //System.out.println("Row selected: " + row);
         if (row >= 0) {
             Data d = listPane.getTableModel().getRowData(row);
+            //System.out.println(d.getDataArray()[1]);
             editPane.setData(d);
             editMode = true;
             editPane.enableEdit(d);
