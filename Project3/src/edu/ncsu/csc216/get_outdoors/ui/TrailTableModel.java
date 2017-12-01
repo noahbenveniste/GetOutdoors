@@ -5,7 +5,8 @@ import edu.ncsu.csc216.get_outdoors.model.Activity;
 import edu.ncsu.csc216.get_outdoors.util.SortedArrayList;
 
 /**
- * Handles interaction between model and GUI for displaying Trail data.
+ * Used to access and manipulate data for selected rows in a table of Trails
+ * for a given Park tab.
  * 
  * @author Noah Benveniste
  * @author Daniel Mills
@@ -52,20 +53,11 @@ public class TrailTableModel extends TableModel {
 	/**
 	 * Returns the a TrailData object constructed from the Objects of the 
 	 *   row at the specified index in the 2D Object array of data.
+	 * @return the data for a specified row
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Data getRowData(int row) {
-//	        String trailID = (String) data[row][0];
-//	        String trailName = (String) data[row][1];
-//	        boolean closedForMaintenance = (boolean) data[row][2];
-//	        double snow = (double) data[row][3];
-//	        double distance = (double) data[row][4];
-//	        Difficulty difficulty = (Difficulty) data[row][5];
-//	        @SuppressWarnings("unchecked")
-//			SortedArrayList<Activity> activities = (SortedArrayList<Activity>) data[row][6];
-//	        TrailData trailData = new TrailData(trailID, trailName, closedForMaintenance,
-//	        		                        snow, distance, difficulty, activities);
 	        return new TrailData(
 	        		(String) data[row][0], //Trail ID
 	        		(String) data[row][1], //Trail name
@@ -94,4 +86,5 @@ public class TrailTableModel extends TableModel {
 		setValueAt(trailData.getDifficulty(), row, 5);
 		setValueAt(trailData.getActivities(), row, 6);
 	}
+	
 }

@@ -12,7 +12,7 @@ import edu.ncsu.csc216.get_outdoors.model.Trail;
 import edu.ncsu.csc216.get_outdoors.model.TrailList;
 
 /**
- * A TrailListTab for the GUI
+ * Creates a tab for a TrailList for a given Park in the GUI
  * 
  * @author Noah Benveniste
  * @author Daniel Mills
@@ -28,7 +28,7 @@ public class TrailListTab extends Tab {
 	 * Creates a TrailListTab
 	 * 
 	 * @param t the TrailList
-	 * @param activities the ActivityList with available Activities
+	 * @param activities the ActivityList with available Activities for the system
 	 */
 	public TrailListTab(TrailList trails, ActivityList activities) {
 		super();
@@ -52,7 +52,7 @@ public class TrailListTab extends Tab {
 	}
 
 	/**
-	 * Deletes a TrailList
+	 * Deletes a Trail
 	 */
 	@Override
 	public void delete() {
@@ -145,4 +145,5 @@ public class TrailListTab extends Tab {
             }
         }
 	}
+	
 }
