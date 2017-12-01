@@ -86,5 +86,4 @@ public class TrailListPane extends ListPane {
 	public TableModel getTableModel() {
 		return this.ttm;
 	}
-	
 }
