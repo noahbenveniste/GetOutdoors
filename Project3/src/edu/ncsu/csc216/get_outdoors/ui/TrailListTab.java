@@ -27,7 +27,7 @@ public class TrailListTab extends Tab {
 	/**
 	 * Creates a TrailListTab
 	 * 
-	 * @param t the TrailList
+	 * @param trails the TrailList
 	 * @param activities the ActivityList with available Activities for the system
 	 */
 	public TrailListTab(TrailList trails, ActivityList activities) {
@@ -78,6 +78,7 @@ public class TrailListTab extends Tab {
 
 	/**
 	 * Notifies an action listener when an action is performed
+	 * @param e the performed action event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
