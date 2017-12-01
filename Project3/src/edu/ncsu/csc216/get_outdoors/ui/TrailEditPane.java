@@ -313,8 +313,12 @@ public class TrailEditPane extends EditPane implements Observer {
      *   Activity contained in the Trail's ActivityList, the 
      *   associated JCheckBox (from "tcActivities[]") is set to 
      *   its selected state. 
-     * Depending on 
-     * 
+     * Depending on whether this instance is in the "edit" or "add"
+     *   state, components are set as editable or enabled. "tcTrailID"
+     *   is ignored, and if in the add mode, "tcTrailName" is set
+     *   as editable. If in the add or edit mode, all other components
+     *   besides the components for the Trail's name, Difficulty, and 
+     *   ID are set as enabled or editable, as appropriate.
      */
 	@Override
 	void fillFields() {
@@ -368,19 +372,34 @@ public class TrailEditPane extends EditPane implements Observer {
 	}
 
     /**
-     * Checks that certain fields are not empty
-     * 
-     * @returns returns true if the fields are empty; false otherwise.
+     * If the TrailEditPane is in add mode, returns true if the three
+     *   editable fields (trailName, snow, and distance) are all
+     *   non-empty.
+     * If the TrailEditPane is in edit mode, returns true if the two
+     *   editable fields (snow and distance) are both non-empty. Since
+     *   a Trail cannot have an empty name, it will always be filled 
+     *   when in edit mode.
+     * Otherwise, the method returns false.
+     * This method is called in Tab.handleDocEvent(), through TrailListTab, 
+     *   to determine whether the necessary fields have been filled to enable 
+     *   the "Save" or "Add" buttons.
+     *   
+     * @return returns true if the name, snow, and distance fields are all non-empty.
      */
 	@Override
 	boolean fieldsNotEmpty() {
 		return getTxtTrailName().getDocument().getLength() != 0 &&
-			   getTxtSnow().getDocument().getLength() != 0 &&
-			   getTxtDistance().getDocument().getLength() != 0;
+		   getTxtSnow().getDocument().getLength() != 0 &&
+		   getTxtDistance().getDocument().getLength() != 0;
 	}
 
 	/**
-	 * Returns a Data object representing the Pane's fields.
+	 * Returns a Data object constructed with the Trail's current values.
+	 *   The Trail values are obtained from the components associated
+	 *   with each value, which are themselves obtained from their 
+	 *   associated getter methods.
+	 * 
+	 * @return returns a Data object of the Trail's current values.
 	 */
 	@Override
 	Data getFields() {
@@ -390,7 +409,13 @@ public class TrailEditPane extends EditPane implements Observer {
 							 (Difficulty) getTcDifficulty().getSelectedItem(), getSelectedActivities());
 		return trailData;
 	}
-	private SortedArrayList<Activity> getSelectedActivities() {
+
+	/**
+	 * Returns a SortedArrayList of Activities of the currently selected
+	 *   Activities from the JCheckBox array "tcActivities". 
+	 *   
+	 * @return returns the list of Activities selected for the Trail.
+	 */	private SortedArrayList<Activity> getSelectedActivities() {
 		SortedArrayList<Activity> activities = new SortedArrayList<Activity>();
 		for (int i = 0; i < getTcActivities().length; i++) {
 			if (tcActivities[i].isSelected()) {
@@ -399,7 +424,15 @@ public class TrailEditPane extends EditPane implements Observer {
 		}
 		return activities;
 	}
-	public void update(Observable obs, Object obj) {
+
+	/**
+	 * If the system's ActivityList has been updated, this method 
+	 *   is called. It sets the TrailEditPane's ActivityList to
+	 *   null, removes all components from the TrailEditPane, and 
+	 *   then calls init(), through which initView() is called.
+	 *   initView() will then reinitialize the TrailEditPane by
+	 *   adding back the removed componenets.
+	 */	public void update(Observable obs, Object obj) {
 		if (obs instanceof ActivityList) {
 			tcActivities = null;
 			this.removeAll();
