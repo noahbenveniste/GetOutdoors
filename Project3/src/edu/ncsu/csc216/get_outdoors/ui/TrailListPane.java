@@ -27,6 +27,8 @@ public class TrailListPane extends ListPane {
 
 	/**
 	 * Constructs a new TrailListPane().
+	 * 
+	 * @param trails the trail list associated with the park for this pane/tab
 	 */
 	public TrailListPane(TrailList trails) {
 		super();
