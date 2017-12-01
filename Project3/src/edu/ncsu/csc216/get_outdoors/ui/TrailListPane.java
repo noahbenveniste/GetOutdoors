@@ -18,9 +18,9 @@ public class TrailListPane extends ListPane {
 
 	/** Unique ID for serialization.  */
 	private static final long serialVersionUID = 1L;
-	/** */
+	/** The trails associated with the Park for this tab */
 	private TrailList trails;
-	/** */
+	/** The table model for the trail list */
 	private TrailTableModel ttm;
 	/** Widths of columns */
     private int[] colWidths = { 55, 110, 220, 55, 55, 55 };
@@ -86,4 +86,5 @@ public class TrailListPane extends ListPane {
 	public TableModel getTableModel() {
 		return this.ttm;
 	}
+	
 }
