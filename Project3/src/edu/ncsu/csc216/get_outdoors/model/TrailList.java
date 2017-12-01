@@ -68,7 +68,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	/**
 	 * Adds a new Trail to the TrailList, taking all parameters required for
 	 *   creating a Trail, minus the Trail's ID, which is generated as the
-	 *   Park's ID, appended by "-<numTrails>". For example the second Trail
+	 *   Park's ID, appended by "-numTrails". For example the second Trail
 	 *   added to a list with Park ID, "park-5", would be given the ID, "park-5-1".
 	 *   
 	 * @param name the Trail's name
@@ -223,7 +223,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 *     3 = double - depth of snow on Trail.
 	 *     4 = double - length of trail ("distance")
 	 *     5 = Difficulty - difficulty of Trail
-	 *     6 = SortedArrayList<Activity> - Activities permitted on Trail.
+	 *     6 = SortedArrayList - Activities permitted on Trail.
 	 * 
 	 * @return returns a 2D array representing the Trails in the list.
 	 */
@@ -257,7 +257,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 *     3 = double - depth of snow on Trail.
 	 *     4 = double - length of trail ("distance")
 	 *     5 = Difficulty - difficulty of Trail
-	 *     6 = SortedArrayList<Activity> - Activities permitted on Trail.
+	 *     6 = SortedArrayList - Activities permitted on Trail.
 	 * 
 	 * @return returns a 2D array representing the Trails in the list that 
 	 *         allow the specified Activity.
@@ -309,7 +309,7 @@ public class TrailList extends Observable implements Observer, Tabular {
 	 *     3 = double - depth of snow on Trail.
 	 *     4 = double - length of trail ("distance")
 	 *     5 = Difficulty - difficulty of Trail
-	 *     6 = SortedArrayList<Activity> - Activities permitted on Trail.
+	 *     6 = SortedArrayList - Activities permitted on Trail.
 	 * 
 	 * @return returns a 2D array representing the Trails not closed for maintenance. 
 	 */

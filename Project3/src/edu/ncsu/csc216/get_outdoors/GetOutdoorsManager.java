@@ -216,7 +216,7 @@ public class GetOutdoorsManager extends Observable implements Observer {
      * Adds the passed park's TrailList to the system's array of TrailLists.
      * This manager instance is added as an Observer of the added TrailList.
      * 
-     * @param park 
+     * @param park the park to add the trail list to
      * @return returns the index at which the new TrailList was added.
      */
     public int addTrailList(Park park) {

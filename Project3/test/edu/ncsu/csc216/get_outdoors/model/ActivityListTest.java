@@ -32,7 +32,7 @@ public class ActivityListTest {
 	 * Sets up a ActivityList for testing.
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		activityList = new ActivityList();
 		activity = new Activity(EXPECTED_ID, ACTIVITY_NAME, DESC, true, SNOW_BOUNDARY);
 		assertNotNull(activity);

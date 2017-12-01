@@ -39,7 +39,7 @@ public class TrailTest {
 	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		activities = new SortedArrayList<Activity>();
 		snowActivity = new Activity("act-1", "Snow Activity", "Needs Snow", true, 7);
 		clearActivity = new Activity("act-2", "Non-Snow Activity", "Needs Clear Day", false, 3);

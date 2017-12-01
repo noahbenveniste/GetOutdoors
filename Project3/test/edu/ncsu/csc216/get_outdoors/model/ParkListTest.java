@@ -32,7 +32,7 @@ public class ParkListTest {
 	 * Sets up a ParkList for testing.
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		parkList = new ParkList();
 		park = new Park(EXPECTED_ID, PARK_NAME, DESC, SNOW_CHANGE);
 		assertNotNull(park);
