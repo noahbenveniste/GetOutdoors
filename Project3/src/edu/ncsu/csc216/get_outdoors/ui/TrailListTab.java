@@ -21,7 +21,7 @@ public class TrailListTab extends Tab {
 
 	/** Default serial version ID */
 	private static final long serialVersionUID = 1L;
-	/** */
+	/** The list of trails associated with the Park for the tab */
 	private TrailList trails;
 
 	/**
