@@ -81,6 +81,11 @@ public class TrailEditPane extends EditPane implements Observer {
 		return activityList;
 	}
 
+	/**
+	 * Gets the text field object for the trail ID
+	 * 
+	 * @return the text field
+	 */
 	JTextField getTxtTrailID() {
         if (null == txtTrailID) {
             txtTrailID = new JTextField();
@@ -432,6 +437,9 @@ public class TrailEditPane extends EditPane implements Observer {
 	 *   then calls init(), through which initView() is called.
 	 *   initView() will then reinitialize the TrailEditPane by
 	 *   adding back the removed componenets.
+	 * 
+	 * @param obs the object being observed
+	 * @param obj the observer of this object
 	 */	public void update(Observable obs, Object obj) {
 		if (obs instanceof ActivityList) {
 			tcActivities = null;
