@@ -16,9 +16,12 @@ import edu.ncsu.csc216.get_outdoors.enums.Difficulty;
 import edu.ncsu.csc216.get_outdoors.model.ActivityList;
 import edu.ncsu.csc216.get_outdoors.util.SortedArrayList;
 import edu.ncsu.csc216.get_outdoors.model.Activity;
+
 /**
- * A Pane belonging to TrailListTab that represents the part 
- *   of the window for editing individual Trails in a Park.
+ * A Pane belonging to TrailListTab that defines the part of the
+ *   window for editing individual Trails in a Park. This class
+ *   extends EditPane and implements the Observer interface, so
+ *   it can observe the system's general ActivityList.
  * 
  * @author demills
  */
@@ -69,7 +72,12 @@ public class TrailEditPane extends EditPane implements Observer {
 		disableEdit();
 	}
 	
-		ActivityList getActivityList() {
+	
+	/**
+	 * Returns the ActivityList of the Trail selected for editing.
+	 * 
+	 * @return return's the ActivityList of the Trail being edited.
+	 */	ActivityList getActivityList() {
 		return activityList;
 	}
 
@@ -83,7 +91,14 @@ public class TrailEditPane extends EditPane implements Observer {
         }
         return txtTrailID;
 	}
-	JTextField getTxtTrailName() {
+
+	/**
+	 * Returns a JTextField of the edited Trail's name. If a JTextField hasn't 
+	 *   been created for this field yet, one is instantiated with a width of 20,
+	 *   then made visible. By default, this field is not editable.
+	 * 
+	 * @return return's text field for name of the Trail being edited.
+	 */	JTextField getTxtTrailName() {
         if (null == txtTrailName) {
             txtTrailName = new JTextField();
             txtTrailName.setColumns(20);
@@ -93,7 +108,14 @@ public class TrailEditPane extends EditPane implements Observer {
         }
         return txtTrailName;
 	}
-	JTextField getTxtSnow() {
+	/**
+	 * Returns a JTextField for editing a Trail's snow depth. If a JTextField hasn't 
+	 *   been created for this field yet, one is instantiated with a width of 5,
+	 *   then made visible. By default, this field is not editable.
+	 * 
+	 * @return return's text field for snow depth of the Trail being edited.
+	 */
+	JTextField getTxtSnow() {
         if (null == txtSnow) {
             txtSnow = new JTextField();
             txtSnow.setColumns(5);
@@ -103,7 +125,15 @@ public class TrailEditPane extends EditPane implements Observer {
         }
         return txtSnow;
 	}
-	JTextField getTxtDistance() {
+
+	/**
+	 * Returns a JTextField for editing a Trail's distance (length). If a JTextField 
+	 *   hasn't been created for this field yet, one is instantiated with a width of 
+	 *   5, then made visible. By default, this field is not editable.
+	 * 
+	 * @return return's text field for the distance of the Trail being edited.
+	 */
+	JTextField getTxtDistance() {
         if (null == txtDistance) {
             txtDistance = new JTextField();
             txtDistance.setColumns(5);
@@ -113,14 +143,29 @@ public class TrailEditPane extends EditPane implements Observer {
         }
         return txtDistance;
 	}
-	JCheckBox getTxtClosedForMaintenance() {
+	/**
+	 * Returns a JCheckBox for toggling the Trail's boolean value, "closedForMaintenance". 
+	 *   If a check box hasn't been created yet, one is instantiated and made visible.
+	 * 
+	 * @return return's a JCheckBox for toggling a Trail's boolean, "closedForMaintenance".
+	 */
+	JCheckBox getTxtClosedForMaintenance() {
         if (null == txtClosedForMaintenance) {
             txtClosedForMaintenance = new JCheckBox();
             txtClosedForMaintenance.setVisible(true);
         }
         return txtClosedForMaintenance;
 	}
-	JCheckBox[] getTcActivities() {
+
+	/**
+	 * Returns JCheckBox array for toggling the Activities in a Trail's ActivityList.
+	 *   One CheckBox is included in the array for each activity in the system's 
+	 *   ActivityList. If this array hasn't been created yet, one is instantiated, with
+	 *   the text for each JCheckBox set to the name of the Activity it will toggle. 
+	 *   Each JCheckBox is individually made visible after construction.
+	 *   
+	 * @return return's a JCheckBox array for toggling a Trail's ActivityList values.
+	 */	JCheckBox[] getTcActivities() {
 		if (tcActivities == null) {
 			tcActivities = new JCheckBox[activityList.size()];
 			for (int i = 0; i < activityList.size(); i++) {
@@ -133,6 +178,14 @@ public class TrailEditPane extends EditPane implements Observer {
 		return tcActivities;
 	}
 
+	/**
+	 * Returns a JComboBox (dropdown menu) for selecting a Trail's Difficulty from 
+	 *   the values listed in the Difficulty enumeration. Each Difficulty value 
+	 *   is added the the combo box, after which it is set to visible. The JComboBox
+	 *   is set to being uneditable after construction.
+	 *   
+	 * @return returns a JComboBox for selecting a Trail's Difficulty.
+	 */
 	JComboBox<Difficulty> getTcDifficulty() {
 		if (tcDifficulty == null) {
 			tcDifficulty = new JComboBox<Difficulty>();
@@ -145,6 +198,13 @@ public class TrailEditPane extends EditPane implements Observer {
 		return tcDifficulty;
 	}
 
+	/**
+	 * Each component of the TrailEditPane is added to its own temporary JPanel, with 
+	 *   a FlowLayout, along with an appropriate JLabel to identify the component's
+	 *   purpose. The components are obtained from the getText*() and getTc*() 
+	 *   methods above. After each temporary JPanel is created and populated,
+	 *   it is added to the TrailEditPane.
+	 */
 	@Override	protected void initView() {
 		// Adding ID components - 1st row.
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
@@ -188,9 +248,12 @@ public class TrailEditPane extends EditPane implements Observer {
 		this.add(panel);
 	}
 	/**
-	 * Sets the TrailEditsPane data.
+	 * Sets the TrailEditPane's Data instance to the passed parameter, after
+	 *   which fillFields() is called to update the GUI for the new values.
+	 *   Unlike enableEdit(), this TrailEditPane's editing state, represented
+	 *   by the boolean "edit", is not altered.
 	 * 
-	 * @param d the Data to set for this TrailEditPane.
+	 * @param data the Data instance to set for this TrailEditPane.
 	 */
 	@Override
 	void setData(Data data) {
@@ -199,21 +262,26 @@ public class TrailEditPane extends EditPane implements Observer {
 	}
 
 	/**
-	 * Enables editing and disables add.
+	 * If this TrailEditPane is not in its editing state, it then is set to 
+	 *   be. This TrailEditPane's Data instance is then set to the passed
+	 *   parameter, after which fillFields() is called to update the GUI
+	 *   for the new values. If this TrailEditPane is in the editing state,
+	 *   nothing is done.
 	 * 
-	 * @param d the Data to set for This TrailEditPane.
+	 * @param data the Data to set for this TrailEditPane.
 	 */
 	@Override
 	void enableEdit(Data data) {
         if (!edit) {
             edit = true;
-            data = (TrailData) data;
+            this.data = (TrailData) data;
             fillFields();
         }
 	}
 
 	/**
-     * Clears the fields by setting data to null.
+     * Clears the fields by setting data to null, then calls fillFields()
+     *   to update the GUI. 
      */
 	@Override
 	void clearFields() {
@@ -221,9 +289,9 @@ public class TrailEditPane extends EditPane implements Observer {
 		fillFields();
 	}
     /**
-     * Adds the given DocumentListener to the text fields.
+     * Adds the passed DocumentListener to each of the text field components.
      * 
-     * @param docListener DocumentListener to add to text fields
+     * @param docListener DocumentListener to add to text fields.
      */
 	@Override
 	void addFieldListener(DocumentListener docListener) {
@@ -232,8 +300,21 @@ public class TrailEditPane extends EditPane implements Observer {
     	getTxtSnow().getDocument().addDocumentListener(docListener);
     	getTxtDistance().getDocument().addDocumentListener(docListener);
 	}
+
     /**
      * Fills the fields with the appropriate text from the Data field.
+     * If "data" is null, the fields are set to empty strings, and the 
+     *   TrailEditPane's components are set to their uneditable state.
+     *   All check boxes are set as unselected and the Difficulty 
+     *   combo box is set to its default value, "Difficult.EASY".
+     *   This is for when no row is selected in the TrailListPane.
+     * If "data" is not null, the components are set to the values
+     *   returned from their associated getter methods. For each
+     *   Activity contained in the Trail's ActivityList, the 
+     *   associated JCheckBox (from "tcActivities[]") is set to 
+     *   its selected state. 
+     * Depending on 
+     * 
      */
 	@Override
 	void fillFields() {
@@ -254,8 +335,6 @@ public class TrailEditPane extends EditPane implements Observer {
             txtSnow.setEditable(false);
             txtDistance.setEditable(false);
             txtClosedForMaintenance.setEnabled(false);
-            // TODO - Check that Difficulty combo box defaults to "EASY".
-
         } else {
             txtTrailID.setText(data.getTrailID());
             txtTrailName.setText(data.getTrailName());
@@ -272,9 +351,12 @@ public class TrailEditPane extends EditPane implements Observer {
             	}
             }
         }
+        
+
         if (add) {
             txtTrailName.setEditable(true);
         }
+
         if (add || edit) {
             txtSnow.setEditable(true);
             txtDistance.setEditable(true);
@@ -284,6 +366,7 @@ public class TrailEditPane extends EditPane implements Observer {
             }
         }
 	}
+
     /**
      * Checks that certain fields are not empty
      * 
@@ -323,5 +406,4 @@ public class TrailEditPane extends EditPane implements Observer {
 			init();
 		}
 	}
-	
 }
