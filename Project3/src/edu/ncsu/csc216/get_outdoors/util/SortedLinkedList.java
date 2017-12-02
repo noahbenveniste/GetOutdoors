@@ -89,8 +89,8 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 * 
 	 * @param index at which to retrieve the element.
 	 * @return returns the element at the passed index.
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 ||
-     *             index >= size())
+     * @throws IndexOutOfBoundsException if the index is negative or greater
+     *                                   than or equal to the list's size.
 	 */
 	@Override
 	public E get(int index) {
@@ -105,8 +105,8 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 * 
 	 * @param index the index in the list to remove the element from.
      * @return the element at the specified index.
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 ||
-     *             index >= size())
+     * @throws IndexOutOfBoundsException if the index is negative or greater
+     *                                   than or equal to the list's size.
 	 */
 	@Override
 	public E remove(int index) {
@@ -135,13 +135,13 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 
 	/**
 	 * Returns a String representation of the list formatted as.
-	 * "[<E1.toString(), <E2.toString()>, ... , <EN.toString()>]"
+	 * "[E1.toString(), E2.toString(), ... , EN.toString()]"
 	 * 
 	 * For example, a list with elements "apple", "banana", and "carrot" 
 	 *   would return a String formatted as:
 	 * "[apple, banana, carrot]"
 	 * 
-	 * @return String 
+	 * @return returns String representation of the list, as elements delimited by commas.
 	 */
 	public String toString() {
 		String returnString = "[";
@@ -180,7 +180,7 @@ public class SortedLinkedList<E extends Comparable<E>> implements SortedList<E> 
 	 * This is considered true the lists are of equal length, both of type
 	 *   SortedLinkedList, with identical elements in the same order.
 	 *
-	 * @returns true if the parameter equals this object; false otherwise.
+	 * @return returns true if the parameter equals this object; false otherwise.
 	 * @param other the Object to compare to this instance.
 	 */
 	@Override
